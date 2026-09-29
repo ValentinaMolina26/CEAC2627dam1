@@ -1,2 +1,0 @@
-inpunt("¿como te llamas?")
-
