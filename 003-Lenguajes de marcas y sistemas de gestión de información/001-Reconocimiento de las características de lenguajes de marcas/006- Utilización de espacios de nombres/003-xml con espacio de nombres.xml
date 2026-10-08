@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<valen:ticket xmlns:valen="https://valen.com/ticket">
-  <valen:fecha>2026-09-29</valen:fecha>
-  <valen:sala>1</valen:sala>
-  <valen:sesion>8:30</valen:sesion>
-  <valen:pelicula>Una pelicula de marcas</valen:pelicula>
-</valen:ticket>
