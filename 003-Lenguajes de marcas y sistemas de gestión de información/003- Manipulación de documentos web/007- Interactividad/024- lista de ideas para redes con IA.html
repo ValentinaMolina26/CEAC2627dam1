@@ -1,0 +1,211 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Mis ideas creativas</title>
+<meta charset="utf-8">
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 40px 20px;
+        min-height: 100vh;
+        font-family: sans-serif;
+        background: linear-gradient(135deg, #f5edff, #e8eaff);
+        color: #39245c;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 32px;
+        margin-bottom: 10px;
+      }
+
+      p {
+        text-align: center;
+        color: #8a75ad;
+        margin-bottom: 30px;
+      }
+
+      #contenedor {
+        max-width: 600px;
+        margin: auto;
+      }
+
+      .idea {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: white;
+        padding: 17px;
+        margin-bottom: 12px;
+        border-radius: 16px;
+        box-shadow: 0 5px 15px #8064a51a;
+      }
+
+      .idea input {
+        width: 20px;
+        height: 20px;
+        accent-color: #9575cd;
+        cursor: pointer;
+      }
+
+      .idea span {
+        flex: 1;
+        overflow-wrap: anywhere;
+      }
+
+      .realizada {
+        color: #a99bbd;
+        text-decoration: line-through;
+      }
+
+      .eliminar {
+        border: none;
+        background: #f3eaff;
+        color: #7956ad;
+        padding: 8px 10px;
+        border-radius: 9px;
+        cursor: pointer;
+      }
+
+      .eliminar:hover {
+        background: #e3d2ff;
+      }
+
+      .entrada {
+        display: flex;
+        gap: 10px;
+        max-width: 600px;
+        margin: 25px auto;
+      }
+
+      .entrada input {
+        flex: 1;
+        min-width: 0;
+        padding: 15px;
+        border: 2px solid #d8c5f5;
+        border-radius: 13px;
+        font-size: 15px;
+        outline: none;
+      }
+
+      .entrada input:focus {
+        border-color: #9575cd;
+      }
+
+      .entrada button {
+        background: #9575cd;
+        color: white;
+        border: none;
+        padding: 0 20px;
+        border-radius: 13px;
+        font-size: 20px;
+        cursor: pointer;
+      }
+
+      .entrada button:hover {
+        background: #7956ad;
+      }
+
+      #resumen {
+        text-align: center;
+        color: #8064a5;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>💜 Mis ideas creativas</h1>
+    <p>Organiza tus ideas y hazlas realidad ✨</p>
+
+    <div id="contenedor">
+    </div>
+
+    <div class="entrada">
+      <input placeholder="Escribe una nueva idea...">
+      <button id="agregar">+</button>
+    </div>
+
+    <p id="resumen">Ideas realizadas: 0</p>
+
+    <script>
+      // Selecciono los elementos
+      let escenario = document.querySelector("div")
+      let entrada = document.querySelector(".entrada input")
+      let ideasredes = []
+
+      // Muestro las ideas
+      function mostrarIdeas() {
+        escenario.innerHTML = ""
+
+        ideasredes.forEach(function(idea, indice) {
+          let tarjeta = document.createElement("div")
+          tarjeta.className = "idea"
+
+          let check = document.createElement("input")
+          check.type = "checkbox"
+          check.checked = idea.realizada
+
+          let texto = document.createElement("span")
+          texto.textContent = idea.nombre
+
+          if (idea.realizada) {
+            texto.className = "realizada"
+          }
+
+          check.onchange = function() {
+            ideasredes[indice].realizada = check.checked
+            mostrarIdeas()
+          }
+
+          let eliminar = document.createElement("button")
+          eliminar.textContent = "✕"
+          eliminar.className = "eliminar"
+
+          eliminar.onclick = function() {
+            ideasredes.splice(indice, 1)
+            mostrarIdeas()
+          }
+
+          tarjeta.appendChild(check)
+          tarjeta.appendChild(texto)
+          tarjeta.appendChild(eliminar)
+
+          escenario.appendChild(tarjeta)
+        })
+
+        let realizadas = ideasredes.filter(function(idea) {
+          return idea.realizada
+        }).length
+
+        document.querySelector("#resumen").textContent =
+          "Ideas realizadas: " + realizadas + " de " + ideasredes.length
+      }
+
+      // Añado una idea nueva
+      document.querySelector("#agregar").onclick = function() {
+        if (entrada.value.trim() !== "") {
+          ideasredes.push({
+            nombre: entrada.value,
+            realizada: false
+          })
+
+          entrada.value = ""
+          mostrarIdeas()
+        }
+      }
+
+      // También puedo añadir una idea pulsando Enter
+      entrada.onkeydown = function(evento) {
+        if (evento.key === "Enter") {
+          document.querySelector("#agregar").click()
+        }
+      }
+    </script>
+  </body>
+</html>
+

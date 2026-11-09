@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  </head>
+  <body>
+    <div id="contenedor">
+    </div>
+    <input>
+    <script>
+      // Selecciono los elementos
+      let escenario = document.querySelector("div")
+      let entrada = document.querySelector("input")
+      let ideasredes = []
+      // Que ocurre cuando pongo un nuevo elemento
+      entrada.onchange = function(){
+      ideasredes.push(entrada.value)
+      escenario.textContent = ideasredes
+      	
+      }
+    </script>
+  </body>
+</html>
