@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Curriculum - Valentina Molina</title>
+
+    <!-- Conectar el archivo CSS -->
+    <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+
+    <!-- Columna izquierda -->
+    <div id="izquierda">
+
+        <img src="valen.png" alt="Fotografía de Valentina">
+
+        <h3>Contacto</h3>
+
+        <ul>
+            <li>Correo: vr261112@gmail.com</li>
+            <li>Teléfono: 663129339</li>
+            <li>Ubicación: Valencia, España</li>
+        </ul>
+
+    </div>
+
+    <!-- Columna derecha -->
+    <div id="derecha">
+
+        <h1>Valentina Molina</h1>
+
+        <h2>Programadora, diseñadora y community manager</h2>
+
+        <section>
+            <h3>Experiencia</h3>
+
+            <article>
+                <h4>Community Manager</h4>
+                <p>FerreLaVilla</p>
+            </article>
+
+        </section>
+
+    </div>
+
+</body>
+</html>
+

@@ -1,0 +1,62 @@
+[
+  {
+    "titulo": "Valentina Molina desarrolla su propia agenda digital para redes sociales",
+    "texto": "La estudiante de Desarrollo de Aplicaciones Multiplataforma Valentina Molina trabaja en Social Media Agenda, una aplicación diseñada para organizar contactos de empresas, perfiles de redes sociales y tareas relacionadas con la gestión de contenido digital.",
+    "fecha": "2026-10-16"
+  },
+  {
+    "titulo": "Social Planner propone una nueva forma de organizar publicaciones digitales",
+    "texto": "Valentina Molina desarrolla Social Planner, un proyecto de aplicación que permite organizar publicaciones, planificar contenido y gestionar ideas para redes sociales mediante una interfaz visual inspirada en los tableros de organización de proyectos.",
+    "fecha": "2026-10-15"
+  },
+  {
+    "titulo": "Valentina Molina combina programación y diseño en sus proyectos digitales",
+    "texto": "La estudiante experimenta con HTML, CSS y Python para crear aplicaciones que combinan funcionalidades prácticas con interfaces visuales atractivas. Sus proyectos buscan mejorar la experiencia de usuario mediante diseños sencillos, colores personalizados y una organización clara de la información.",
+    "fecha": "2026-10-15"
+  },
+  {
+    "titulo": "Una agenda de clientes incorpora una interfaz gráfica desarrollada con Python",
+    "texto": "Valentina Molina amplía su proyecto Social Media Agenda con una interfaz gráfica basada en Tkinter. La aplicación permite introducir empresas, guardar datos de contacto y registrar perfiles de Instagram en archivos CSV para facilitar la gestión de clientes.",
+    "fecha": "2026-10-14"
+  },
+  {
+    "titulo": "Valentina Molina crea una base de datos para organizar viajes",
+    "texto": "Como parte de sus prácticas de programación y bases de datos, la estudiante desarrolla Travel Planner, un proyecto que utiliza MySQL para almacenar y consultar información relacionada con clientes, destinos y planificación de viajes.",
+    "fecha": "2026-10-14"
+  },
+  {
+    "titulo": "La inteligencia artificial inspira nuevos proyectos de desarrollo de aplicaciones",
+    "texto": "Valentina Molina explora las posibilidades de la inteligencia artificial aplicada al desarrollo de software, el marketing digital y la creación de contenido. Su objetivo es descubrir herramientas que permitan automatizar tareas y mejorar la productividad en futuros proyectos profesionales.",
+    "fecha": "2026-10-12"
+  },
+  {
+    "titulo": "Valentina Molina desarrolla una aplicación para gestionar clientes",
+    "texto": "La estudiante trabaja en una agenda digital orientada a pequeñas empresas y profesionales de redes sociales. El proyecto incluye registro de clientes, almacenamiento de información y consulta de datos, con la intención de ampliar sus funcionalidades en futuras versiones.",
+    "fecha": "2026-10-10"
+  },
+  {
+    "titulo": "Los proyectos académicos acercan a Valentina Molina al desarrollo de software",
+    "texto": "Durante sus estudios de Desarrollo de Aplicaciones Multiplataforma, Valentina Molina practica programación estructurada, programación orientada a objetos y operaciones con bases de datos. Los ejercicios forman parte de un proceso de aprendizaje centrado en crear aplicaciones funcionales desde cero.",
+    "fecha": "2026-10-08"
+  },
+  {
+    "titulo": "Valentina Molina experimenta con páginas web personalizadas",
+    "texto": "La estudiante desarrolla páginas web con HTML y CSS, incorporando tarjetas, formularios, efectos visuales, colores personalizados y diseños adaptables. Sus prácticas combinan creatividad y tecnología para mejorar la presentación de información en entornos digitales.",
+    "fecha": "2026-10-05"
+  },
+  {
+    "titulo": "El marketing digital se convierte en una fuente de inspiración para nuevos desarrollos",
+    "texto": "Valentina Molina explora la relación entre programación, publicidad y gestión de redes sociales. Sus ideas incluyen herramientas para organizar campañas, administrar contactos comerciales y planificar publicaciones para marcas y pequeños negocios.",
+    "fecha": "2026-10-03"
+  },
+  {
+    "titulo": "Valentina Molina desarrolla un sistema de gestión para una clínica veterinaria",
+    "texto": "Como ejercicio de programación orientada a objetos, la estudiante crea una aplicación ficticia para registrar animales, consultar sus datos y organizar la información de sus propietarios. El proyecto utiliza clases y listas de objetos para practicar los fundamentos de la programación.",
+    "fecha": "2026-09-28"
+  },
+  {
+    "titulo": "Valentina Molina apuesta por unir tecnología, creatividad e inteligencia artificial",
+    "texto": "La futura desarrolladora busca combinar sus intereses en programación, diseño, marketing y herramientas de inteligencia artificial para crear aplicaciones digitales útiles. Sus proyectos académicos representan los primeros pasos hacia un perfil profesional multidisciplinar en el sector tecnológico.",
+    "fecha": "2026-09-15"
+  }
+]
