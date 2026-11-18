@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+	<head>
+		<style>
+			#nombre,#apellidos,#email{
+				width:200px;
+				background:grey;
+				border-radius:100px;
+				padding:20px;
+				margin:5px;
+				color:white;
+			}
+			#nombre{background:red;}
+			#apellidos{background:green;}
+			#email{background:blue;}
+		</style>
+	</head>
+	<body>
+		<div id="nombre"></div>
+		<div id="apellidos"></div>
+		<div id="email"></div>
+		<script>
+			fetch("datos.json")					// Ves a coger datos.json y traemelo
+			.then(function(retorno){return retorno.json()}) // Lo que viene es un JSON
+			.then(function(datos){				// Vienen los datos y los recojo
+				console.log(datos)				// Y los vomito a la consola
+				// document. = Del documento
+				// querySelector("#nombre") = Buscame un elemento con id nombre
+				// .textContent = Y en su contenido
+				// = = Vamos a poner
+				// datos = De los datos que han llegado
+				// .nombre = El nombre
+				document.querySelector("#nombre").textContent = datos.nombre
+				
+				document.querySelector("#apellidos").textContent = datos.apellidos
+				
+				document.querySelector("#email").textContent = datos.email
+			})
+		</script>
+	</body>
+</html>
