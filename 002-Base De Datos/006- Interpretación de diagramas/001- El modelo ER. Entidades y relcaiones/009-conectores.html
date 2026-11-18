@@ -1,0 +1,971 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagrama de clases</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f4f5fb;
+      color: #252744;
+    }
+
+    /* Barra superior */
+    .toolbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 16px 24px;
+      background: white;
+      box-shadow: 0 3px 15px #20234a12;
+    }
+
+    .toolbar h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .toolbar p {
+      margin: 4px 0 0;
+      color: #777b95;
+      font-size: 12px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 9px;
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      filter: brightness(0.96);
+    }
+
+    .add-entity {
+      background: #6957d9;
+      color: white;
+      white-space: nowrap;
+    }
+
+    /* Área de trabajo */
+    #canvas {
+      position: relative;
+      min-height: calc(100vh - 75px);
+      margin-top: 75px;
+      overflow: visible;
+      background-color: #f4f5fb;
+      background-image: radial-gradient(#cbd0e4 1px, transparent 1px);
+      background-size: 22px 22px;
+    }
+
+    /* SVG que dibuja los conectores */
+    #connections {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .wire {
+      fill: none;
+      stroke: #7966e8;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      marker-end: url(#arrowhead);
+    }
+
+    .wire-preview {
+      fill: none;
+      stroke: #a49af5;
+      stroke-width: 2.5;
+      stroke-dasharray: 7 5;
+      stroke-linecap: round;
+    }
+
+    /* Entidades */
+    .entity {
+      position: absolute;
+      z-index: 2;
+      width: 290px;
+      background: white;
+      border: 1px solid #e0e3f0;
+      border-radius: 13px;
+      box-shadow: 0 8px 25px #30345c12;
+      overflow: hidden;
+    }
+
+    .entity-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 14px;
+      color: white;
+      background: linear-gradient(135deg, #7667e8, #5846bd);
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+    }
+
+    .entity-header:active {
+      cursor: grabbing;
+    }
+
+    .entity-header strong {
+      flex: 1;
+      min-width: 0;
+      font-size: 15px;
+      outline: none;
+      overflow-wrap: anywhere;
+    }
+
+    .hint {
+      font-size: 10px;
+      opacity: 0.8;
+      white-space: nowrap;
+    }
+
+    .delete-entity {
+      padding: 5px 8px;
+      color: white;
+      background: #ffffff25;
+      font-size: 17px;
+    }
+
+    /* Tabla */
+    .entity table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-size: 12px;
+    }
+
+    .entity th {
+      padding: 11px 8px;
+      color: #777b95;
+      background: #f8f8fc;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      text-align: left;
+    }
+
+    .entity th:first-child {
+      width: 60%;
+    }
+
+    .entity th:last-child {
+      width: 40%;
+    }
+
+    .entity td {
+      padding: 8px 5px;
+      border-top: 1px solid #eceef6;
+      overflow: hidden;
+    }
+
+    .entity tbody tr:nth-child(even) {
+      background: #fafaff;
+    }
+
+    /* Zona editable de cada propiedad */
+    .cell-content {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      min-width: 0;
+      min-height: 24px;
+    }
+
+    .property-name,
+    .property-type {
+      flex: 1;
+      min-width: 0;
+      overflow-wrap: anywhere;
+      outline: none;
+      cursor: text;
+    }
+
+    .property-name {
+      color: #343653;
+      font-weight: 600;
+    }
+
+    .property-type {
+      color: #6957d9;
+    }
+
+    .property-name:focus,
+    .property-type:focus,
+    .entity-header strong:focus {
+      background: #efedff;
+      color: #393064;
+      border-radius: 3px;
+    }
+
+    /* Conectores de entrada y salida */
+    .connector {
+      flex: 0 0 13px;
+      width: 13px;
+      height: 13px;
+      padding: 0;
+      border: 2px solid white;
+      border-radius: 50%;
+      box-shadow: 0 0 0 1.5px #7966e8;
+      background: #a89cfb;
+      cursor: crosshair;
+      touch-action: none;
+    }
+
+    .connector:hover {
+      background: #5846bd;
+      transform: scale(1.2);
+    }
+
+    .connector-input {
+      background: white;
+    }
+
+    .connector-output {
+      background: #7966e8;
+    }
+
+    .entity-footer {
+      padding: 10px;
+      border-top: 1px solid #eceef6;
+    }
+
+    .add-property {
+      width: 100%;
+      color: #6957d9;
+      background: #f0eeff;
+    }
+
+    .help {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 900;
+      max-width: calc(100vw - 32px);
+      padding: 10px 14px;
+      color: #666b85;
+      background: white;
+      border: 1px solid #e3e5f0;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px #30345c0d;
+      font-size: 12px;
+      pointer-events: none;
+    }
+
+    @media (max-width: 600px) {
+      .toolbar {
+        padding: 12px;
+      }
+
+      .toolbar h1 {
+        font-size: 16px;
+      }
+
+      .toolbar p {
+        display: none;
+      }
+
+      .entity {
+        width: 270px;
+      }
+
+      .help {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="toolbar">
+    <div>
+      <h1>✦ Mi diagrama de clases</h1>
+      <p>Crea, edita y conecta tus propiedades</p>
+    </div>
+
+    <button class="add-entity" id="createEntity">
+      + Añadir entidad
+    </button>
+  </header>
+
+  <main id="canvas">
+    <svg id="connections" xmlns="http://www.w3.org/2000/svg"
+         aria-hidden="true">
+      <defs>
+        <marker id="arrowhead"
+                markerWidth="8"
+                markerHeight="8"
+                refX="6"
+                refY="3"
+                orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#7966e8"></path>
+        </marker>
+      </defs>
+    </svg>
+  </main>
+
+  <div class="help">
+    Arrastra desde un punto morado hasta un punto blanco para conectar propiedades.
+  </div>
+
+  <script>
+    const canvas = document.getElementById("canvas");
+    const svg = document.getElementById("connections");
+    const createButton = document.getElementById("createEntity");
+
+    const STORAGE_KEY = "miDiagramaDeClases";
+
+    let entityCount = 0;
+    let connections = [];
+    let activeStart = null;
+    let previewPath = null;
+
+    // Identificadores únicos para entidades y propiedades
+    function createId() {
+      return Date.now().toString(36) +
+        Math.random().toString(36).slice(2, 11);
+    }
+
+    // ==================================================
+    // GUARDAR DIAGRAMA EN LOCALSTORAGE
+    // ==================================================
+
+    function saveDiagram() {
+      const entities = [
+        ...canvas.querySelectorAll(".entity")
+      ].map(entity => ({
+        id: entity.dataset.id,
+        name: entity.querySelector(".entity-name").textContent,
+        x: parseFloat(entity.style.left) || 0,
+        y: parseFloat(entity.style.top) || 0,
+
+        properties: [
+          ...entity.querySelectorAll("tbody tr")
+        ].map(row => ({
+          id: row.dataset.id,
+          name: row.querySelector(".property-name").textContent,
+          type: row.querySelector(".property-type").textContent
+        }))
+      }));
+
+      // Conservar solo las conexiones cuyos extremos existan
+      const validIds = new Set();
+
+      entities.forEach(entity => {
+        entity.properties.forEach(property => {
+          validIds.add(property.id);
+        });
+      });
+
+      connections = connections.filter(connection =>
+        validIds.has(connection.fromPropertyId) &&
+        validIds.has(connection.toPropertyId)
+      );
+
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          entities,
+          connections
+        }));
+      } catch (error) {
+        console.error("No se pudo guardar el diagrama:", error);
+      }
+
+      drawConnections();
+    }
+
+    // ==================================================
+    // CREAR UNA ENTIDAD
+    // ==================================================
+
+    function addEntity(
+      name,
+      x,
+      y,
+      properties = [
+        { name: "id", type: "int" },
+        { name: "nombre", type: "String" },
+        { name: "fecha", type: "Date" }
+      ],
+      id = createId()
+    ) {
+      entityCount++;
+
+      const entity = document.createElement("section");
+      entity.className = "entity";
+      entity.dataset.id = id;
+      entity.style.left = x + "px";
+      entity.style.top = y + "px";
+
+      entity.innerHTML = `
+        <div class="entity-header">
+          <strong class="entity-name"
+                  contenteditable="true"
+                  spellcheck="false"></strong>
+          <span class="hint">MOVER</span>
+          <button class="delete-entity"
+                  title="Eliminar entidad"
+                  aria-label="Eliminar entidad">×</button>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Propiedad</th>
+              <th>Tipo</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+
+        <div class="entity-footer">
+          <button class="add-property">+ Añadir propiedad</button>
+        </div>
+      `;
+
+      entity.querySelector(".entity-name").textContent = name;
+
+      const tbody = entity.querySelector("tbody");
+
+      properties.forEach(property => {
+        addPropertyRow(tbody, property);
+      });
+
+      canvas.appendChild(entity);
+
+      // Añadir una propiedad nueva
+      entity.querySelector(".add-property").addEventListener("click", () => {
+        const row = addPropertyRow(tbody, {
+          name: "nuevaPropiedad",
+          type: "String"
+        });
+
+        saveDiagram();
+        row.querySelector(".property-name").focus();
+      });
+
+      // Eliminar entidad y sus conexiones
+      entity.querySelector(".delete-entity").addEventListener("click", () => {
+        const propertyIds = [
+          ...entity.querySelectorAll("tbody tr")
+        ].map(row => row.dataset.id);
+
+        connections = connections.filter(connection =>
+          !propertyIds.includes(connection.fromPropertyId) &&
+          !propertyIds.includes(connection.toPropertyId)
+        );
+
+        entity.remove();
+        updateCanvasSize();
+        saveDiagram();
+      });
+
+      enableDrag(entity, entity.querySelector(".entity-header"));
+
+      updateCanvasSize();
+      saveDiagram();
+
+      return entity;
+    }
+
+    // ==================================================
+    // CREAR FILA CON CONECTORES DE ENTRADA Y SALIDA
+    // ==================================================
+
+    function addPropertyRow(tbody, property) {
+      const row = document.createElement("tr");
+      row.dataset.id = property.id || createId();
+
+      row.innerHTML = `
+        <td>
+          <div class="cell-content">
+            <button type="button"
+                    class="connector connector-input"
+                    title="Entrada de la propiedad"
+                    aria-label="Entrada"></button>
+            <div class="property-name"
+                 contenteditable="true"
+                 spellcheck="false"></div>
+          </div>
+        </td>
+
+        <td>
+          <div class="cell-content">
+            <div class="property-type"
+                 contenteditable="true"
+                 spellcheck="false"></div>
+            <button type="button"
+                    class="connector connector-output"
+                    title="Arrastra para crear una conexión"
+                    aria-label="Salida"></button>
+          </div>
+        </td>
+      `;
+
+      row.querySelector(".property-name").textContent = property.name;
+      row.querySelector(".property-type").textContent = property.type;
+
+      tbody.appendChild(row);
+
+      return row;
+    }
+
+    // ==================================================
+    // TAMAÑO DEL ÁREA DE TRABAJO
+    // ==================================================
+
+    function updateCanvasSize() {
+      const minimumHeight = Math.max(300, window.innerHeight - 75);
+
+      let bottom = minimumHeight;
+
+      canvas.querySelectorAll(".entity").forEach(entity => {
+        bottom = Math.max(
+          bottom,
+          entity.offsetTop + entity.offsetHeight + 40
+        );
+      });
+
+      canvas.style.height = bottom + "px";
+      drawConnections();
+    }
+
+    // ==================================================
+    // DIBUJAR LOS HILOS DE CONEXIÓN
+    // ==================================================
+
+    function getConnectorCenter(connector) {
+      const rect = connector.getBoundingClientRect();
+      const canvasRect = canvas.getBoundingClientRect();
+
+      return {
+        x: rect.left + rect.width / 2 - canvasRect.left,
+        y: rect.top + rect.height / 2 - canvasRect.top
+      };
+    }
+
+    function createWirePath(start, end, className) {
+      const path = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "path"
+      );
+
+      const distance = Math.max(
+        45,
+        Math.abs(end.x - start.x) * 0.45
+      );
+
+      const direction = end.x >= start.x ? 1 : -1;
+
+      const control1X = start.x + distance * direction;
+      const control2X = end.x - distance * direction;
+
+      path.setAttribute(
+        "d",
+        `M ${start.x} ${start.y}
+         C ${control1X} ${start.y},
+           ${control2X} ${end.y},
+           ${end.x} ${end.y}`
+      );
+
+      path.setAttribute("class", className);
+
+      return path;
+    }
+
+    function drawConnections() {
+      const defs = svg.querySelector("defs");
+
+      // Mantener la definición de la flecha
+      svg.replaceChildren(defs);
+
+      const width = Math.max(canvas.clientWidth, 1);
+      const height = Math.max(canvas.clientHeight, 1);
+
+      svg.setAttribute("width", width);
+      svg.setAttribute("height", height);
+      svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+
+      connections.forEach(connection => {
+        const from = canvas.querySelector(
+          `[data-id="${connection.fromEntityId}"] ` +
+          `[data-id="${connection.fromPropertyId}"] ` +
+          `.connector-output`
+        );
+
+        const to = canvas.querySelector(
+          `[data-id="${connection.toEntityId}"] ` +
+          `[data-id="${connection.toPropertyId}"] ` +
+          `.connector-input`
+        );
+
+        if (!from || !to) return;
+
+        const start = getConnectorCenter(from);
+        const end = getConnectorCenter(to);
+
+        svg.appendChild(
+          createWirePath(start, end, "wire")
+        );
+      });
+    }
+
+    // ==================================================
+    // DRAG AND DROP DE LOS HILOS
+    // ==================================================
+
+    canvas.addEventListener("pointerdown", event => {
+      const output = event.target.closest(".connector-output");
+
+      if (!output) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      activeStart = output;
+      previewPath = createWirePath(
+        getConnectorCenter(output),
+        getConnectorCenter(output),
+        "wire-preview"
+      );
+
+      svg.appendChild(previewPath);
+    });
+
+    document.addEventListener("pointermove", event => {
+      if (!activeStart || !previewPath) return;
+
+      const start = getConnectorCenter(activeStart);
+      const canvasRect = canvas.getBoundingClientRect();
+
+      const end = {
+        x: event.clientX - canvasRect.left,
+        y: event.clientY - canvasRect.top
+      };
+
+      const updatedPath = createWirePath(
+        start,
+        end,
+        "wire-preview"
+      );
+
+      previewPath.setAttribute(
+        "d",
+        updatedPath.getAttribute("d")
+      );
+    });
+
+    document.addEventListener("pointerup", event => {
+      if (!activeStart) return;
+
+      const output = activeStart;
+      const input = document.elementFromPoint(
+        event.clientX,
+        event.clientY
+      )?.closest(".connector-input");
+
+      if (input) {
+        const fromRow = output.closest("tr");
+        const toRow = input.closest("tr");
+
+        const fromEntity = output.closest(".entity");
+        const toEntity = input.closest(".entity");
+
+        // No conectar una propiedad consigo misma
+        if (fromRow.dataset.id !== toRow.dataset.id) {
+          const duplicate = connections.some(connection =>
+            connection.fromPropertyId === fromRow.dataset.id &&
+            connection.toPropertyId === toRow.dataset.id
+          );
+
+          if (!duplicate) {
+            connections.push({
+              id: createId(),
+              fromEntityId: fromEntity.dataset.id,
+              fromPropertyId: fromRow.dataset.id,
+              toEntityId: toEntity.dataset.id,
+              toPropertyId: toRow.dataset.id
+            });
+
+            saveDiagram();
+          }
+        }
+      }
+
+      activeStart = null;
+
+      if (previewPath) {
+        previewPath.remove();
+        previewPath = null;
+      }
+
+      drawConnections();
+    });
+
+    // ==================================================
+    // MOVER ENTIDADES POR LA PANTALLA
+    // ==================================================
+
+    function enableDrag(entity, handle) {
+      let startX = 0;
+      let startY = 0;
+      let initialLeft = 0;
+      let initialTop = 0;
+      let dragging = false;
+
+      handle.addEventListener("pointerdown", event => {
+        if (
+          event.target.closest("button") ||
+          event.target.closest("[contenteditable='true']")
+        ) {
+          return;
+        }
+
+        dragging = true;
+        startX = event.clientX;
+        startY = event.clientY;
+        initialLeft = entity.offsetLeft;
+        initialTop = entity.offsetTop;
+
+        handle.setPointerCapture(event.pointerId);
+        event.preventDefault();
+      });
+
+      handle.addEventListener("pointermove", event => {
+        if (!dragging) return;
+
+        const maxX = Math.max(
+          0,
+          canvas.clientWidth - entity.offsetWidth
+        );
+
+        const newLeft = initialLeft + event.clientX - startX;
+        const newTop = initialTop + event.clientY - startY;
+
+        entity.style.left =
+          Math.max(0, Math.min(newLeft, maxX)) + "px";
+
+        entity.style.top = Math.max(0, newTop) + "px";
+
+        updateCanvasSize();
+      });
+
+      function stopDragging() {
+        if (!dragging) return;
+
+        dragging = false;
+        updateCanvasSize();
+        saveDiagram();
+      }
+
+      handle.addEventListener("pointerup", stopDragging);
+      handle.addEventListener("pointercancel", stopDragging);
+    }
+
+    // ==================================================
+    // GUARDADO AUTOMÁTICO AL EDITAR
+    // ==================================================
+
+    canvas.addEventListener("input", event => {
+      if (event.target.isContentEditable) {
+        saveDiagram();
+      }
+    });
+
+    // ==================================================
+    // AÑADIR ENTIDADES
+    // ==================================================
+
+    createButton.addEventListener("click", () => {
+      const offset = entityCount * 30;
+
+      const availableWidth = Math.max(
+        1,
+        canvas.clientWidth - 320
+      );
+
+      const x = 40 + (offset % availableWidth);
+      const y = 35 + (offset % 300);
+
+      addEntity(
+        "Nueva entidad " + (entityCount + 1),
+        x,
+        y
+      );
+    });
+
+    // ==================================================
+    // RECUPERAR EL DIAGRAMA GUARDADO
+    // ==================================================
+
+    function loadDiagram() {
+      let savedEntities = null;
+      let savedConnections = [];
+
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+
+        if (saved !== null) {
+          const data = JSON.parse(saved);
+
+          // Formato actual
+          if (Array.isArray(data.entities)) {
+            savedEntities = data.entities;
+            savedConnections = Array.isArray(data.connections)
+              ? data.connections
+              : [];
+          }
+
+          // Compatibilidad con la versión anterior,
+          // que guardaba directamente un array de entidades
+          else if (Array.isArray(data)) {
+            savedEntities = data;
+          } else {
+            throw new Error("Formato de diagrama no válido");
+          }
+        }
+      } catch (error) {
+        console.error(
+          "No se pudo recuperar el diagrama:",
+          error
+        );
+      }
+
+      if (savedEntities !== null) {
+        const usedEntityIds = new Set();
+        const usedPropertyIds = new Set();
+
+        // Recuperar las entidades y asignar identificadores
+        // cuando proceda, para admitir el formato antiguo.
+        savedEntities.forEach(item => {
+          if (
+            !item ||
+            typeof item.name !== "string" ||
+            !Number.isFinite(item.x) ||
+            !Number.isFinite(item.y) ||
+            !Array.isArray(item.properties)
+          ) {
+            return;
+          }
+
+          let entityId = item.id || createId();
+
+          while (usedEntityIds.has(entityId)) {
+            entityId = createId();
+          }
+
+          usedEntityIds.add(entityId);
+
+          const properties = item.properties
+            .filter(property =>
+              property &&
+              typeof property.name === "string" &&
+              typeof property.type === "string"
+            )
+            .map(property => {
+              let propertyId = property.id || createId();
+
+              while (usedPropertyIds.has(propertyId)) {
+                propertyId = createId();
+              }
+
+              usedPropertyIds.add(propertyId);
+
+              return {
+                id: propertyId,
+                name: property.name,
+                type: property.type
+              };
+            });
+
+          addEntity(
+            item.name,
+            item.x,
+            item.y,
+            properties,
+            entityId
+          );
+        });
+
+        // Restaurar solo conexiones con extremos existentes
+        const entityIds = new Set(
+          [...canvas.querySelectorAll(".entity")]
+            .map(entity => entity.dataset.id)
+        );
+
+        const propertyToEntity = new Map();
+
+        canvas.querySelectorAll(".entity").forEach(entity => {
+          entity.querySelectorAll("tbody tr").forEach(row => {
+            propertyToEntity.set(
+              row.dataset.id,
+              entity.dataset.id
+            );
+          });
+        });
+
+        connections = savedConnections.filter(connection =>
+          connection &&
+          propertyToEntity.has(connection.fromPropertyId) &&
+          propertyToEntity.has(connection.toPropertyId) &&
+          entityIds.has(connection.fromEntityId) &&
+          entityIds.has(connection.toEntityId) &&
+          propertyToEntity.get(connection.fromPropertyId) ===
+            connection.fromEntityId &&
+          propertyToEntity.get(connection.toPropertyId) ===
+            connection.toEntityId &&
+          connection.fromPropertyId !== connection.toPropertyId
+        );
+
+        saveDiagram();
+        updateCanvasSize();
+        drawConnections();
+        return;
+      }
+
+      // Si no existe ningún guardado, crear una entidad inicial
+      addEntity("Entidad", 70, 55);
+    }
+
+    // Redibujar los hilos si cambia el tamaño de la ventana
+    window.addEventListener("resize", () => {
+      updateCanvasSize();
+      drawConnections();
+    });
+
+    // Iniciar la aplicación
+    loadDiagram();
+  </script>
+
+</body>
+</html>
+

@@ -1,0 +1,523 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagrama de clases</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f4f5fb;
+      color: #252744;
+    }
+
+    /* Barra superior */
+    .toolbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 16px 24px;
+      background: white;
+      box-shadow: 0 3px 15px #20234a12;
+    }
+
+    .toolbar h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .toolbar p {
+      margin: 4px 0 0;
+      color: #777b95;
+      font-size: 12px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 9px;
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      filter: brightness(0.96);
+    }
+
+    .add-entity {
+      background: #6957d9;
+      color: white;
+      white-space: nowrap;
+    }
+
+    /* Área de trabajo */
+    #canvas {
+      position: relative;
+      min-height: calc(100vh - 75px);
+      margin-top: 75px;
+      overflow: hidden;
+      background-color: #f4f5fb;
+      background-image: radial-gradient(#cbd0e4 1px, transparent 1px);
+      background-size: 22px 22px;
+    }
+
+    /* Entidades */
+    .entity {
+      position: absolute;
+      width: 280px;
+      background: white;
+      border: 1px solid #e0e3f0;
+      border-radius: 13px;
+      box-shadow: 0 8px 25px #30345c12;
+      overflow: hidden;
+    }
+
+    .entity-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 14px;
+      color: white;
+      background: linear-gradient(135deg, #7667e8, #5846bd);
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+    }
+
+    .entity-header:active {
+      cursor: grabbing;
+    }
+
+    .entity-header strong {
+      flex: 1;
+      min-width: 0;
+      font-size: 15px;
+      outline: none;
+      overflow-wrap: anywhere;
+    }
+
+    .entity-header .hint {
+      font-size: 10px;
+      opacity: 0.8;
+      white-space: nowrap;
+    }
+
+    .delete-entity {
+      padding: 5px 8px;
+      color: white;
+      background: #ffffff25;
+      font-size: 17px;
+    }
+
+    .delete-entity:hover {
+      background: #ffffff45;
+    }
+
+    /* Tabla de propiedades */
+    .entity table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .entity th {
+      padding: 11px 12px;
+      text-align: left;
+      color: #777b95;
+      background: #f8f8fc;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .entity td {
+      padding: 11px 12px;
+      border-top: 1px solid #eceef6;
+      overflow-wrap: anywhere;
+    }
+
+    .entity tbody tr:nth-child(even) {
+      background: #fafaff;
+    }
+
+    .entity td[contenteditable="true"],
+    .entity-header strong[contenteditable="true"] {
+      outline: none;
+      cursor: text;
+    }
+
+    .entity td:focus,
+    .entity-header strong:focus {
+      box-shadow: inset 0 0 0 2px #b8afff;
+    }
+
+    .entity td:first-child {
+      color: #343653;
+      font-weight: 500;
+    }
+
+    .entity td:last-child {
+      color: #6957d9;
+    }
+
+    .entity-footer {
+      padding: 10px;
+      border-top: 1px solid #eceef6;
+      text-align: center;
+    }
+
+    .add-property {
+      width: 100%;
+      color: #6957d9;
+      background: #f0eeff;
+    }
+
+    .add-property:hover {
+      background: #e6e2ff;
+    }
+
+    .help {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 900;
+      padding: 10px 14px;
+      color: #666b85;
+      background: white;
+      border: 1px solid #e3e5f0;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px #30345c0d;
+      font-size: 12px;
+      pointer-events: none;
+    }
+
+    /* Adaptación a móviles */
+    @media (max-width: 600px) {
+      .toolbar {
+        padding: 12px;
+      }
+
+      .toolbar h1 {
+        font-size: 16px;
+      }
+
+      .toolbar p {
+        display: none;
+      }
+
+      .entity {
+        width: 260px;
+      }
+
+      .help {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="toolbar">
+    <div>
+      <h1>✦ Mi diagrama de clases</h1>
+      <p>Crea, edita y organiza tus entidades</p>
+    </div>
+
+    <button class="add-entity" id="createEntity">
+      + Añadir entidad
+    </button>
+  </header>
+
+  <main id="canvas"></main>
+
+  <div class="help">
+    ✋ Arrastra desde la cabecera · Haz clic en el texto para editar
+  </div>
+
+  <script>
+    const canvas = document.getElementById("canvas");
+    const createButton = document.getElementById("createEntity");
+
+    const STORAGE_KEY = "miDiagramaDeClases";
+
+    let entityCount = 0;
+
+    // GUARDAR el diagrama en localStorage
+    function saveDiagram() {
+      const entities = [...canvas.querySelectorAll(".entity")].map(entity => ({
+        name: entity.querySelector(".entity-header strong").textContent,
+        x: entity.offsetLeft,
+        y: entity.offsetTop,
+
+        properties: [...entity.querySelectorAll("tbody tr")].map(row => ({
+          name: row.cells[0].textContent,
+          type: row.cells[1].textContent
+        }))
+      }));
+
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(entities));
+      } catch (error) {
+        console.error("No se pudo guardar el diagrama:", error);
+      }
+    }
+
+    // CREAR una entidad
+    function addEntity(
+      name,
+      x,
+      y,
+      properties = [
+        { name: "id", type: "int" },
+        { name: "nombre", type: "String" },
+        { name: "fecha", type: "Date" }
+      ]
+    ) {
+      entityCount++;
+
+      const entity = document.createElement("section");
+      entity.className = "entity";
+      entity.style.left = x + "px";
+      entity.style.top = y + "px";
+
+      entity.innerHTML = `
+        <div class="entity-header">
+          <strong contenteditable="true" spellcheck="false"></strong>
+          <span class="hint">MOVER</span>
+          <button class="delete-entity"
+                  title="Eliminar entidad"
+                  aria-label="Eliminar entidad">×</button>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Propiedad</th>
+              <th>Tipo</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+
+        <div class="entity-footer">
+          <button class="add-property">+ Añadir propiedad</button>
+        </div>
+      `;
+
+      // Establecer el nombre
+      entity.querySelector("strong").textContent = name;
+
+      // Crear las filas de propiedades
+      const tbody = entity.querySelector("tbody");
+
+      properties.forEach(property => {
+        const row = document.createElement("tr");
+        const nameCell = document.createElement("td");
+        const typeCell = document.createElement("td");
+
+        nameCell.contentEditable = "true";
+        typeCell.contentEditable = "true";
+
+        nameCell.textContent = property.name;
+        typeCell.textContent = property.type;
+
+        row.append(nameCell, typeCell);
+        tbody.appendChild(row);
+      });
+
+      canvas.appendChild(entity);
+
+      // AÑADIR una propiedad
+      entity.querySelector(".add-property").addEventListener("click", () => {
+        const row = document.createElement("tr");
+        const nameCell = document.createElement("td");
+        const typeCell = document.createElement("td");
+
+        nameCell.contentEditable = "true";
+        typeCell.contentEditable = "true";
+
+        nameCell.textContent = "nuevaPropiedad";
+        typeCell.textContent = "String";
+
+        row.append(nameCell, typeCell);
+        tbody.appendChild(row);
+
+        saveDiagram();
+        nameCell.focus();
+      });
+
+      // ELIMINAR una entidad
+      entity.querySelector(".delete-entity").addEventListener("click", () => {
+        entity.remove();
+        saveDiagram();
+      });
+
+      // ACTIVAR drag and drop
+      enableDrag(entity, entity.querySelector(".entity-header"));
+
+      saveDiagram();
+    }
+
+    // MOVER entidades con ratón o pantalla táctil
+    function enableDrag(entity, handle) {
+      let startX = 0;
+      let startY = 0;
+      let initialLeft = 0;
+      let initialTop = 0;
+      let dragging = false;
+
+      handle.addEventListener("pointerdown", event => {
+        if (
+          event.target.closest("button") ||
+          event.target.closest("[contenteditable='true']")
+        ) {
+          return;
+        }
+
+        dragging = true;
+
+        startX = event.clientX;
+        startY = event.clientY;
+        initialLeft = entity.offsetLeft;
+        initialTop = entity.offsetTop;
+
+        handle.setPointerCapture(event.pointerId);
+        event.preventDefault();
+      });
+
+      handle.addEventListener("pointermove", event => {
+        if (!dragging) return;
+
+        const maxX = Math.max(
+          0, canvas.clientWidth - entity.offsetWidth
+        );
+
+        const maxY = Math.max(
+          0, canvas.scrollHeight - entity.offsetHeight
+        );
+
+        const newLeft = initialLeft + event.clientX - startX;
+        const newTop = initialTop + event.clientY - startY;
+
+        entity.style.left =
+          Math.max(0, Math.min(newLeft, maxX)) + "px";
+
+        entity.style.top =
+          Math.max(0, Math.min(newTop, maxY)) + "px";
+      });
+
+      function stopDragging() {
+        if (!dragging) return;
+
+        dragging = false;
+        saveDiagram();
+      }
+
+      handle.addEventListener("pointerup", stopDragging);
+      handle.addEventListener("pointercancel", stopDragging);
+    }
+
+    // GUARDAR automáticamente al editar nombres y propiedades
+    canvas.addEventListener("input", event => {
+      if (event.target.isContentEditable) {
+        saveDiagram();
+      }
+    });
+
+    // AÑADIR entidades nuevas
+    createButton.addEventListener("click", () => {
+      const offset = entityCount * 30;
+
+      const availableWidth = Math.max(
+        1, canvas.clientWidth - 320
+      );
+
+      const x = 40 + (offset % availableWidth);
+      const y = 35 + (offset % 300);
+
+      addEntity(
+        "Nueva entidad " + (entityCount + 1),
+        x,
+        y
+      );
+    });
+
+    // RECUPERAR el diagrama guardado
+    function loadDiagram() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+
+        if (saved !== null) {
+          const entities = JSON.parse(saved);
+
+          if (!Array.isArray(entities)) {
+            throw new Error("Formato de diagrama no válido");
+          }
+
+          entities.forEach(entity => {
+            if (
+              !entity ||
+              typeof entity.name !== "string" ||
+              !Number.isFinite(entity.x) ||
+              !Number.isFinite(entity.y) ||
+              !Array.isArray(entity.properties) ||
+              !entity.properties.every(property =>
+                property &&
+                typeof property.name === "string" &&
+                typeof property.type === "string"
+              )
+            ) {
+              throw new Error("Datos de entidad no válidos");
+            }
+
+            addEntity(
+              entity.name,
+              entity.x,
+              entity.y,
+              entity.properties
+            );
+          });
+
+          return;
+        }
+      } catch (error) {
+        console.error(
+          "No se pudo recuperar el diagrama:",
+          error
+        );
+
+        canvas.replaceChildren();
+        entityCount = 0;
+      }
+
+      // Crear la entidad inicial si no existe un guardado
+      if (canvas.children.length === 0) {
+        addEntity("Entidad", 70, 55);
+      }
+    }
+
+    // Iniciar la aplicación
+    loadDiagram();
+  </script>
+
+</body>
+</html>
+
