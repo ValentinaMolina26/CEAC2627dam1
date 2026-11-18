@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>La tienda de Valentina Molina</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}">
+</head>
+<body>
+  <header class="cabecera">
+    <div class="marca">VM<span>SPORT</span></div>
+    <div>
+      <p class="sobrelinea">EQUÍPATE PARA IR MÁS LEJOS</p>
+      <h1>Tienda deportiva</h1>
+      <h2>Aquí tienes tus artículos deportivos</h2>
+    </div>
+    <a class="admin-link" href="/login">Panel admin ↗</a>
+  </header>
+
+  <main>
+    <div class="intro">
+      <div>
+        <p class="sobrelinea morado">SELECCIÓN DEPORTIVA</p>
+        <h3>Encuentra tu próximo favorito.</h3>
+        <p class="subtitulo">Todo lo que necesitas para moverte a tu manera.</p>
+      </div>
+      <label class="buscador">⌕ <input id="busqueda" type="search" placeholder="Buscar producto..."></label>
+    </div>
+    <div id="estado" class="estado" role="status">Cargando productos...</div>
+    <section id="productos" aria-label="Catálogo de productos"></section>
+  </main>
+
+  <aside id="ticket" class="carrito">
+    <div class="carrito-titulo"><span>🛍️ Tu carrito</span><span id="contador" class="contador">0</span></div>
+    <div id="contenido-carrito" class="contenido-carrito"><p class="vacio">Todavía no has añadido productos.</p></div>
+    <div class="total-linea"><span>Total</span><strong id="total">0,00 €</strong></div>
+    <div class="datos-cliente">
+      <p class="datos-titulo">Tus datos para el pedido</p>
+      <label>Nombre<input id="nombre-cliente" name="nombre" type="text" autocomplete="given-name" placeholder="Tu nombre" required></label>
+      <label>Apellido<input id="apellido-cliente" name="apellido" type="text" autocomplete="family-name" placeholder="Tu apellido" required></label>
+      <label>Correo electrónico<input id="correo-cliente" name="correo" type="email" autocomplete="email" placeholder="tu@correo.com" required></label>
+    </div>
+    <button id="comprar" class="boton-comprar" disabled>Finalizar compra</button>
+    <p id="mensaje" class="mensaje"></p>
+  </aside>
+
+  <footer>(c) 2026 Valentina Molina · Hecho para moverte</footer>
+
+<script>
+let pedido = [];
+let productosCargados = [];
+
+const seccion = document.querySelector("#productos");
+const estado = document.querySelector("#estado");
+const ticket = document.querySelector("#contenido-carrito");
+const totalTexto = document.querySelector("#total");
+const contador = document.querySelector("#contador");
+const botonComprar = document.querySelector("#comprar");
+const mensaje = document.querySelector("#mensaje");
+
+function escapar(texto) {
+  return String(texto ?? "").replace(/[&<>"']/g, function(c) {
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+  });
+}
+
+function pintarProductos(lista) {
+  seccion.innerHTML = "";
+  if (!lista.length) {
+    estado.textContent = "No se encontraron productos con esa búsqueda.";
+    estado.style.display = "block";
+    return;
+  }
+  estado.style.display = "none";
+  lista.forEach(function(producto, indice) {
+    const tarjeta = document.createElement("article");
+    tarjeta.className = "producto";
+    const nombreProducto = String(producto.nombre || "").toLowerCase();
+    const imagenesProducto = {
+      "zapatillas running": "zapatillas_running.jpg",
+      "zapatillas fútbol": "zapatillas_futbol.jpg",
+      "zapatillas baloncesto": "zapatillas_baloncesto.jpg",
+      "camiseta deportiva": "camiseta.jpg",
+      "pantalón corto": "pantalon.jpg",
+      "sudadera deportiva": "sudadera.jpg",
+      "chándal completo": "chandal.jpg",
+      "calcetines deportivos": "calcetines.jpg",
+      "mochila deportiva": "mochila.jpg",
+      "bolsa de gimnasio": "bolsa.jpg",
+      "balón de fútbol": "balon_futbol.jpg",
+      "balón de baloncesto": "balon_baloncesto.jpg",
+      "balón de voleibol": "balon_voleibol.jpg",
+      "raqueta de tenis": "raqueta_tenis.jpg",
+      "pala de pádel": "pala_padel.jpg",
+      "pelotas de tenis": "pelotas_tenis.jpg",
+      "guantes de portero": "guantes_portero.svg",
+      "espinilleras": "espinilleras.svg",
+      "comba deportiva": "comba.svg",
+      "mancuernas 5 kg": "mancuernas_5kg.svg",
+      "mancuernas 10 kg": "mancuernas_10kg.svg",
+      "esterilla fitness": "fitness.jpg",
+      "bandas elásticas": "bandas_elasticas.svg",
+      "banco de musculación": "banco_musculacion.svg",
+      "bicicleta estática": "bicicleta_estatica.svg",
+      "casco de ciclismo": "casco_ciclismo.svg",
+      "gafas de natación": "gafas_natacion.svg",
+      "gorro de natación": "gorro_natacion.svg",
+      "botella deportiva": "botella.svg",
+      "reloj deportivo": "reloj_deportivo.svg"
+    };
+    let imagen = imagenesProducto[nombreProducto] || "accesorios.svg";
+    tarjeta.innerHTML = `
+      <div class="producto-imagen imagen-${indice % 6}">
+        <span class="etiqueta">SPORT / VM</span>
+        <img class="foto-producto" src="/static/imagenes/${imagen}" alt="${escapar(producto.nombre)}" loading="lazy">
+      </div>
+      <div class="producto-info">
+        <p class="categoria">COLECCIÓN DEPORTIVA</p>
+        <h4>${escapar(producto.nombre)}</h4>
+        <p class="descripcion">${escapar(producto.descripcion)}</p>
+        <div class="producto-pie">
+          <strong>${Number(producto.precio).toLocaleString("es-ES",{style:"currency",currency:"EUR"})}</strong>
+          <button class="anadir" type="button">Añadir <span>＋</span></button>
+        </div>
+      </div>`;
+    tarjeta.querySelector(".anadir").addEventListener("click", function() {
+      pedido.push({nombre: producto.nombre, precio: producto.precio});
+      dibujarCarrito();
+    });
+    seccion.appendChild(tarjeta);
+  });
+}
+
+function dibujarCarrito() {
+  contador.textContent = pedido.length;
+  if (!pedido.length) {
+    ticket.innerHTML = '<p class="vacio">Todavía no has añadido productos.</p>';
+  } else {
+    ticket.innerHTML = "";
+    pedido.forEach(function(producto, indice) {
+      const linea = document.createElement("div");
+      linea.className = "linea-carrito";
+      linea.innerHTML = `<span>${escapar(producto.nombre)}<small>${Number(producto.precio).toLocaleString("es-ES",{style:"currency",currency:"EUR"})}</small></span><button class="quitar" aria-label="Quitar producto">×</button>`;
+      linea.querySelector("button").addEventListener("click", function() {
+        pedido.splice(indice, 1);
+        dibujarCarrito();
+      });
+      ticket.appendChild(linea);
+    });
+  }
+  const suma = pedido.reduce((acumulado, producto) => acumulado + Number(producto.precio), 0);
+  totalTexto.textContent = suma.toLocaleString("es-ES",{style:"currency",currency:"EUR"});
+  botonComprar.disabled = pedido.length === 0;
+  mensaje.textContent = "";
+}
+
+fetch("/datos")
+  .then(function(resultado) {
+    if (!resultado.ok) throw new Error("El servidor no pudo leer los productos.");
+    return resultado.json();
+  })
+  .then(function(datos) {
+    productosCargados = datos;
+    pintarProductos(productosCargados);
+  })
+  .catch(function(error) {
+    estado.textContent = "No se pudieron cargar los productos. Comprueba que estás ejecutando el archivo Python correcto.";
+    console.error(error);
+  });
+
+document.querySelector("#busqueda").addEventListener("input", function() {
+  const texto = this.value.toLowerCase().trim();
+  pintarProductos(productosCargados.filter(p =>
+    String(p.nombre).toLowerCase().includes(texto) ||
+    String(p.descripcion).toLowerCase().includes(texto)
+  ));
+});
+
+botonComprar.addEventListener("click", function() {
+  botonComprar.disabled = true;
+  botonComprar.textContent = "Guardando pedido...";
+  const nombre = document.querySelector("#nombre-cliente").value.trim();
+  const apellido = document.querySelector("#apellido-cliente").value.trim();
+  const correoInput = document.querySelector("#correo-cliente");
+  const correo = correoInput.value.trim();
+
+  if (!nombre || !apellido || !correo || !correoInput.checkValidity()) {
+    mensaje.textContent = "Completa nombre, apellido y un correo válido para continuar.";
+    botonComprar.disabled = pedido.length === 0;
+    botonComprar.textContent = "Finalizar compra";
+    return;
+  }
+
+  fetch("/insertapedido", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      cliente: {nombre: nombre, apellido: apellido, correo: correo},
+      productos: pedido
+    })
+  })
+  .then(async res => {
+    const datos = await res.json().catch(() => ({}));
+    if (!res.ok || !datos.ok) throw new Error(datos.mensaje || "El servidor no pudo guardar el pedido.");
+    pedido = [];
+    dibujarCarrito();
+    mensaje.textContent = "¡Pedido guardado correctamente! Número: " + datos.numero;
+  })
+  .catch(error => {
+    mensaje.textContent = error.message || "Ha ocurrido un error al guardar el pedido. Comprueba la terminal de Python.";
+  })
+  .finally(() => {
+    botonComprar.textContent = "Finalizar compra";
+    botonComprar.disabled = pedido.length === 0;
+  });
+});
+</script>
+</body>
+</html>

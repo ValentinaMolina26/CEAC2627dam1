@@ -1,0 +1,39 @@
+TIENDA DEPORTIVA DE VALENTINA — VERSIÓN CORREGIDA
+
+Esta versión conserva los 30 productos del proyecto original y el estilo morado/lila,
+conservando las partes principales: Flask, SQLite, JavaScript, sección de productos,
+ticket/carrito, formulario de nombre, apellido y correo, envío POST a /insertapedido,
+y panel de administración con los datos del cliente.
+
+ARCHIVOS
+- 009-guardar los pedidos.py : aplicación Flask, catálogo, guardar pedidos y /admin.
+- templates/tienda.html      : tienda y carrito.
+- templates/admin.html       : panel privado con pedidos, cliente, correo y detalles.
+- templates/login.html       : inicio de sesión del panel.
+- static/imagenes/           : ilustraciones locales de los productos.
+- static/estilo.css          : diseño moderno responsive.
+- 005-productos en sqlite.sql: los 30 productos originales.
+
+IMPORTANTE PARA QUE APAREZCAN LOS PRODUCTOS
+1. Descomprime el ZIP dentro de la carpeta de tu proyecto.
+2. Copia los archivos manteniendo las carpetas templates y static.
+3. NO borres tu tienda.db original. El programa utiliza esa base de datos si está en
+   la misma carpeta que el archivo Python.
+4. Ejecuta ESTE archivo Python: 009-guardar los pedidos.py
+5. Abre http://127.0.0.1:5000/ para la tienda.
+6. Pulsa “Panel admin” o abre http://127.0.0.1:5000/login para iniciar sesión.
+7. Usuario inicial: admin | Contraseña inicial: Valentina2026!
+   Cambia estos datos en el archivo Python antes de publicar la web en internet.
+
+El programa crea las tablas si no existen y carga los 30 productos originales solo si
+la tabla productos está vacía. Si ya tienes productos guardados, no los borra ni duplica.
+El panel /admin requiere iniciar sesión. La contraseña inicial está pensada solo para pruebas locales.
+
+DATOS DEL CLIENTE
+Antes de finalizar la compra se solicitan nombre, apellido y correo electrónico.
+Estos datos se guardan junto con el pedido y aparecen en el panel de administración.
+La aplicación añade las columnas necesarias a una tabla pedidos antigua sin borrar
+los pedidos que ya existían.
+
+
+SI UN PEDIDO NO SE GUARDA: la tienda muestra el error en el mensaje debajo del botón y la terminal de Python registra el detalle. Comprueba que tienda.db no esté abierto en otro programa con bloqueo de escritura.

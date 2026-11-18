@@ -1,0 +1,549 @@
+
+/* =========================================
+   1. ESTILOS GENERALES
+   ========================================= */
+
+:root{
+  --color-principal:#8064a9;
+  --color-oscuro:#513c70;
+  --color-secundario:#b9a0dc;
+  --color-claro:#f5f0fb;
+  --color-fondo:#f7f5fa;
+  --color-texto:#393044;
+  --color-texto-suave:#82768e;
+  --color-borde:#e9e0f2;
+  --color-blanco:#ffffff;
+  --sombra:0 12px 35px rgba(81,60,112,.09);
+  --radio:18px;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html,
+body{
+  width:100%;
+  min-height:100%;
+  padding:0;
+  margin:0;
+  background:var(--color-fondo);
+  color:var(--color-texto);
+  font-family:Arial,sans-serif;
+  line-height:1.7;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+/* =========================================
+   2. FRENTE DEL BLOG
+   ========================================= */
+
+header,
+main,
+footer{
+  margin:auto;
+  background:var(--color-blanco);
+  max-width:900px;
+  padding:40px 60px;
+}
+
+/* Cabecera */
+
+header{
+  position:relative;
+  overflow:hidden;
+  text-align:center;
+  border-bottom:1px solid var(--color-borde);
+  background:linear-gradient(135deg,#fff 20%,#f1e9fa 100%);
+}
+
+header h1{
+  margin-top:0;
+  margin-bottom:5px;
+  color:var(--color-oscuro);
+  font-size:38px;
+  letter-spacing:-1.3px;
+}
+
+header h2{
+  margin-top:0;
+  margin-bottom:0;
+  color:var(--color-principal);
+  font-size:19px;
+  font-weight:normal;
+  letter-spacing:.5px;
+}
+
+/* Contenido principal */
+
+main{
+  padding-top:35px;
+  padding-bottom:35px;
+}
+
+/* Artículos */
+
+article{
+  position:relative;
+  padding:27px 25px;
+  margin:0 0 18px;
+  border:1px solid var(--color-borde);
+  border-radius:var(--radio);
+  background:#fff;
+  box-shadow:0 4px 15px rgba(81,60,112,.035);
+  transition:transform .25s ease,
+             box-shadow .25s ease,
+             border-color .25s ease;
+}
+
+article:first-child{
+  padding-top:27px;
+}
+
+article:last-child{
+  margin-bottom:0;
+}
+
+article:hover{
+  transform:translateY(-4px);
+  border-color:#d5c1eb;
+  box-shadow:var(--sombra);
+}
+
+article h3{
+  margin-top:0;
+  margin-bottom:8px;
+  color:var(--color-oscuro);
+  font-size:22px;
+  line-height:1.4;
+  transition:color .2s ease;
+}
+
+article h3:hover{
+  color:var(--color-principal);
+}
+
+article time{
+  display:inline-block;
+  margin-bottom:13px;
+  padding:4px 11px;
+  border-radius:20px;
+  background:var(--color-claro);
+  color:var(--color-principal);
+  font-size:12px;
+  font-weight:700;
+}
+
+article p{
+  margin-bottom:0;
+  color:#61576b;
+  font-size:15px;
+  line-height:1.85;
+}
+
+/* Enlaces */
+
+a{
+  color:var(--color-principal);
+  text-decoration:none;
+  transition:color .2s ease;
+}
+
+a:hover{
+  color:var(--color-oscuro);
+}
+
+/* Pie de página */
+
+footer{
+  border-top:1px solid var(--color-borde);
+  text-align:center;
+  color:var(--color-texto-suave);
+  font-size:13px;
+  background:linear-gradient(135deg,#fff,#f5effb);
+}
+
+
+/* =========================================
+   3. ESTRUCTURA DEL ADMINISTRADOR
+   ========================================= */
+
+html:has(body#admin){
+  height:100%;
+}
+
+body#admin{
+  display:flex!important;
+  flex-direction:row;
+  align-items:stretch;
+  min-height:100vh;
+  height:auto;
+  margin:0;
+  padding:0;
+  background:var(--color-fondo);
+  color:var(--color-texto);
+  font-family:Arial,sans-serif;
+}
+
+/* Menú lateral */
+
+body#admin > #izquierda{
+  display:flex!important;
+  flex-direction:column;
+  flex:0 0 260px;
+  width:260px;
+  min-height:100vh;
+  box-sizing:border-box;
+  background:linear-gradient(180deg,#513c70,#72558f);
+  color:white;
+  padding:30px 16px;
+}
+
+/* Enlaces del menú */
+
+body#admin > #izquierda > a{
+  display:block;
+  color:#f4edfc;
+  text-decoration:none;
+  padding:14px 18px;
+  margin:4px 0;
+  border:1px solid transparent;
+  border-radius:12px;
+  font-size:14px;
+  font-weight:600;
+  transition:background .2s ease,
+             border-color .2s ease,
+             transform .2s ease;
+}
+
+body#admin > #izquierda > a:hover{
+  background:rgba(255,255,255,.15);
+  border-color:rgba(255,255,255,.15);
+  color:white;
+  transform:translateX(3px);
+}
+
+/* Zona de trabajo */
+
+body#admin > #derecha{
+  display:block!important;
+  flex:1 1 0;
+  min-width:0;
+  max-width:none;
+  width:auto;
+  min-height:100vh;
+  background:var(--color-fondo);
+  padding:38px;
+  overflow-x:auto;
+}
+
+
+/* =========================================
+   4. TABLA DEL ADMINISTRADOR
+   ========================================= */
+
+#admin #derecha table{
+  width:100%;
+  border-collapse:collapse;
+  background:#fff;
+  font-size:14px;
+  line-height:1.7;
+}
+
+body#admin > #derecha > table{
+  border-radius:var(--radio);
+  overflow:hidden;
+  box-shadow:var(--sombra);
+  border:1px solid var(--color-borde);
+}
+
+/* Cabecera de la tabla */
+
+#admin #derecha thead{
+  background:linear-gradient(135deg,#f1eafa,#faf7fd);
+}
+
+#admin #derecha th{
+  padding:19px 22px;
+  text-align:left;
+  color:var(--color-oscuro);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  border-bottom:1px solid var(--color-borde);
+}
+
+/* Celdas */
+
+#admin #derecha td{
+  padding:19px 22px;
+  border-bottom:1px solid #f0eaf5;
+  vertical-align:top;
+  color:#655a70;
+}
+
+#admin #derecha td:first-child{
+  color:var(--color-oscuro);
+  font-weight:700;
+  min-width:230px;
+}
+
+#admin #derecha td:nth-child(2){
+  white-space:nowrap;
+  color:var(--color-texto-suave);
+  font-variant-numeric:tabular-nums;
+}
+
+#admin #derecha td:nth-child(3){
+  min-width:300px;
+}
+
+/* Efectos de las filas */
+
+#admin #derecha tbody tr{
+  transition:background .2s ease;
+}
+
+#admin #derecha tbody tr:hover{
+  background:#faf7fd;
+}
+
+#admin #derecha tbody tr:last-child td{
+  border-bottom:0;
+}
+
+
+/* =========================================
+   5. CAMPOS Y BOTONES
+   ========================================= */
+
+#admin #derecha input,
+#admin #derecha select,
+#admin #derecha textarea{
+  max-width:100%;
+  padding:12px 14px;
+  border:1px solid #ded3eb;
+  border-radius:10px;
+  background:#fff;
+  color:var(--color-texto);
+  font:inherit;
+  outline:none;
+  transition:border-color .2s ease,
+             box-shadow .2s ease;
+}
+
+#admin #derecha input:focus,
+#admin #derecha select:focus,
+#admin #derecha textarea:focus{
+  border-color:var(--color-principal);
+  box-shadow:0 0 0 4px rgba(128,100,169,.13);
+}
+
+/* Botones generales */
+
+#admin #derecha button,
+#admin #derecha input[type="submit"]{
+  padding:12px 20px;
+  border:0;
+  border-radius:10px;
+  background:linear-gradient(135deg,#8064a9,#624783);
+  color:white;
+  font:inherit;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 5px 12px rgba(81,60,112,.15);
+  transition:transform .2s ease,
+             box-shadow .2s ease,
+             filter .2s ease;
+}
+
+#admin #derecha button:hover,
+#admin #derecha input[type="submit"]:hover{
+  filter:brightness(1.08);
+  transform:translateY(-2px);
+  box-shadow:0 8px 18px rgba(81,60,112,.2);
+}
+
+
+/* =========================================
+   6. FORMULARIO DE ARTÍCULOS
+   ========================================= */
+
+#admin #derecha form{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  width:100%;
+  max-width:750px;
+  padding:32px;
+  border:1px solid var(--color-borde);
+  border-radius:var(--radio);
+  background:linear-gradient(145deg,#fff,#fdfbff);
+  box-shadow:var(--sombra);
+}
+
+/* Etiquetas */
+
+#admin #derecha form label{
+  display:block;
+  margin-top:5px;
+  color:var(--color-oscuro);
+  font-size:14px;
+  font-weight:700;
+}
+
+/* Campos */
+
+#admin #derecha form input:not([type="submit"]),
+#admin #derecha form select,
+#admin #derecha form textarea{
+  display:block;
+  width:100%;
+  max-width:100%;
+  padding:13px 15px;
+  border:1px solid #ded3eb;
+  border-radius:10px;
+  background:#fff;
+  color:var(--color-texto);
+  font:inherit;
+  outline:none;
+  transition:border-color .2s ease,
+             box-shadow .2s ease,
+             background .2s ease;
+}
+
+#admin #derecha form input:focus,
+#admin #derecha form select:focus,
+#admin #derecha form textarea:focus{
+  border-color:var(--color-principal);
+  background:#fefcff;
+  box-shadow:0 0 0 4px rgba(128,100,169,.13);
+}
+
+/* Área del contenido */
+
+#admin #derecha form textarea{
+  min-height:190px;
+  resize:vertical;
+}
+
+/* Botón de guardar */
+
+#admin #derecha form input[type="submit"],
+#admin #derecha form button{
+  width:auto;
+  max-width:100%;
+  align-self:flex-start;
+  margin-top:12px;
+  padding:13px 25px;
+  border:0;
+  border-radius:11px;
+  background:linear-gradient(135deg,#8064a9,#624783);
+  color:white;
+  font:inherit;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 6px 15px rgba(81,60,112,.18);
+  transition:transform .2s ease,
+             box-shadow .2s ease,
+             filter .2s ease;
+}
+
+#admin #derecha form input[type="submit"]:hover,
+#admin #derecha form button:hover{
+  filter:brightness(1.08);
+  transform:translateY(-2px);
+  box-shadow:0 9px 20px rgba(81,60,112,.22);
+}
+
+
+/* =========================================
+   7. DISEÑO ADAPTABLE A MÓVILES
+   ========================================= */
+
+@media(max-width:760px){
+
+  /* Frente */
+
+  header,
+  main,
+  footer{
+    padding:25px 20px;
+  }
+
+  header h1{
+    font-size:29px;
+  }
+
+  header h2{
+    font-size:17px;
+  }
+
+  article{
+    padding:22px 18px;
+  }
+
+  article h3{
+    font-size:20px;
+  }
+
+  article p{
+    font-size:14px;
+  }
+
+  /* Administrador */
+
+  body#admin{
+    flex-direction:column;
+  }
+
+  body#admin > #izquierda{
+    width:100%;
+    min-height:auto;
+    flex:auto;
+    flex-direction:row;
+    flex-wrap:wrap;
+    align-items:center;
+    padding:16px;
+  }
+
+  body#admin > #izquierda > a{
+    padding:10px 12px;
+  }
+
+  body#admin > #derecha{
+    width:100%;
+    min-height:0;
+    padding:20px 14px;
+  }
+
+  /* Tabla */
+
+  #admin #derecha table{
+    font-size:13px;
+  }
+
+  #admin #derecha th,
+  #admin #derecha td{
+    padding:13px;
+  }
+
+  /* Formulario */
+
+  #admin #derecha form{
+    max-width:100%;
+    padding:22px 18px;
+    gap:12px;
+  }
+
+  #admin #derecha form input,
+  #admin #derecha form select,
+  #admin #derecha form textarea{
+    width:100%;
+  }
+}
+

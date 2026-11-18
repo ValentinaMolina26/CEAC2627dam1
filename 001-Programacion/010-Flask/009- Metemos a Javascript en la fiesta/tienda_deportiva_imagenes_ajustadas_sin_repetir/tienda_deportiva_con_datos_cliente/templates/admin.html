@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Administración · VM Sport</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}">
+</head>
+<body class="admin-body">
+  <header class="cabecera admin-cabecera">
+    <div class="marca">VM<span>SPORT</span></div>
+    <div>
+      <p class="sobrelinea">ZONA PRIVADA</p>
+      <h1>Panel de administración</h1>
+      <h2>Consulta los pedidos realizados en la tienda.</h2>
+    </div>
+    <a class="admin-link" href="/logout">Cerrar sesión</a>
+  </header>
+  <main>
+    <div class="intro">
+      <div><p class="sobrelinea morado">RESUMEN</p><h3>¡Hola, administradora!</h3><p class="subtitulo">Aquí tienes la actividad de tu tienda.</p></div>
+    </div>
+    <div class="resumen">
+      <div class="resumen-card"><span>Pedidos recibidos</span><strong>{{ total_pedidos }}</strong><small>Pedidos guardados</small></div>
+      <div class="resumen-card"><span>Importe total</span><strong>{{ "%.2f"|format(total_ventas)|replace(".", ",") }} €</strong><small>Suma de los pedidos</small></div>
+    </div>
+    <div class="tabla-cabecera"><h3>Últimos pedidos</h3><input id="filtrar-pedidos" type="search" placeholder="Buscar pedido..."></div>
+    {% if pedidos %}
+    <div class="tabla-contenedor">
+      <table id="tabla-pedidos">
+        <thead><tr><th>N.º de pedido</th><th>Cliente</th><th>Correo</th><th>Fecha</th><th>Artículos</th><th>Total</th><th>Detalle</th></tr></thead>
+        <tbody>
+        {% for pedido in pedidos %}
+          <tr class="fila-pedido">
+            <td><strong>{{ pedido.numerodepedido or ("Pedido #" ~ pedido.id) }}</strong></td>
+            <td>{{ ((pedido.nombre or "") ~ " " ~ (pedido.apellido or ""))|trim or "No indicado" }}</td>
+            <td>{{ pedido.correo or "No indicado" }}</td>
+            <td>{{ pedido.fecha }}</td>
+            <td>{{ pedido.cantidad }}</td>
+            <td><strong>{{ "%.2f"|format(pedido.total)|replace(".", ",") }} €</strong></td>
+            <td><button type="button" class="detalle-btn" onclick="mostrarDetalle('detalle-{{ pedido.id }}', this)">Ver detalle +</button></td>
+          </tr>
+          <tr id="detalle-{{ pedido.id }}" class="fila-detalle" hidden>
+            <td colspan="7">
+              <div class="detalle-contenido">
+                <strong>Productos del pedido</strong>
+                {% if pedido.productos %}
+                  <ul>{% for producto in pedido.productos %}<li>{{ producto.nombre }} — {{ producto.precio }} €</li>{% endfor %}</ul>
+                {% else %}<p>No hay detalle disponible para este pedido.</p>{% endif %}
+              </div>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+      <div class="sin-pedidos"><span>📦</span><h3>Aún no hay pedidos</h3><p>Cuando un cliente finalice una compra, aparecerá aquí.</p><a href="/">Ir a la tienda</a></div>
+    {% endif %}
+  </main>
+  <footer>(c) 2026 Valentina Molina · Panel de administración</footer>
+<script>
+function mostrarDetalle(id, boton) {
+  const fila = document.getElementById(id);
+  fila.hidden = !fila.hidden;
+  boton.textContent = fila.hidden ? "Ver detalle +" : "Ocultar detalle −";
+}
+const filtro = document.querySelector("#filtrar-pedidos");
+if (filtro) filtro.addEventListener("input", function() {
+  const texto = this.value.toLowerCase();
+  document.querySelectorAll(".fila-pedido").forEach(function(fila) {
+    const visible = fila.textContent.toLowerCase().includes(texto);
+    fila.hidden = !visible;
+    const detalle = fila.nextElementSibling;
+    if (detalle && detalle.classList.contains("fila-detalle") && !visible) detalle.hidden = true;
+  });
+});
+</script>
+</body>
+</html>

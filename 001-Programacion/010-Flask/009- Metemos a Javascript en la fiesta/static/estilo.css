@@ -1,0 +1,289 @@
+
+/* ==============================
+   ESTILO GENERAL
+   ============================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 35px 20px;
+    background: #f0edf5;
+    color: #292333;
+    font-family: "Segoe UI", Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* ==============================
+   CABECERA
+   ============================== */
+
+header {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px;
+    background: linear-gradient(135deg, #6b4c8a, #9273b5);
+    color: white;
+    border-radius: 24px 24px 0 0;
+    box-shadow: 0 10px 30px rgba(64, 42, 85, 0.12);
+}
+
+header h1 {
+    margin: 0 0 8px;
+    font-size: clamp(30px, 5vw, 44px);
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+header h2 {
+    margin: 0;
+    color: #f0e8fa;
+    font-size: 17px;
+    font-weight: 400;
+}
+
+/* ==============================
+   CONTENIDO PRINCIPAL
+   ============================== */
+
+main {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 35px;
+    background: white;
+    min-height: 250px;
+}
+
+section {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    align-items: stretch;
+}
+
+/* ==============================
+   TARJETAS DE PRODUCTOS
+   ============================== */
+
+article {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 25px;
+    background: #ffffff;
+    border: 1px solid #eee7f5;
+    border-radius: 20px;
+    box-shadow: 0 5px 18px rgba(48, 31, 65, 0.06);
+    transition: transform 0.25s ease,
+                box-shadow 0.25s ease,
+                border-color 0.25s ease;
+}
+
+article:hover {
+    transform: translateY(-6px);
+    border-color: #bca5d7;
+    box-shadow: 0 14px 30px rgba(83, 56, 112, 0.13);
+}
+
+article h4 {
+    margin: 0 0 12px;
+    color: #4c3267;
+    font-size: 19px;
+    line-height: 1.4;
+    font-weight: 750;
+}
+
+article p {
+    flex-grow: 1;
+    margin: 0 0 22px;
+    color: #777080;
+    font-size: 14px;
+}
+
+/* ==============================
+   BOTONES Y PRECIOS
+   ============================== */
+
+button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 11px 20px;
+    background: #6b4c8a;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(107, 76, 138, 0.18);
+    transition: background 0.2s ease,
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+button:hover {
+    background: #503469;
+    transform: translateY(-2px);
+    box-shadow: 0 7px 16px rgba(107, 76, 138, 0.25);
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+button:focus-visible {
+    outline: 3px solid #c7a9ec;
+    outline-offset: 3px;
+}
+
+/* ==============================
+   TICKET / CARRITO
+   ============================== */
+
+aside {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 1000;
+    width: 300px;
+    max-width: calc(100vw - 32px);
+    max-height: 65vh;
+    overflow-y: auto;
+    padding: 24px;
+    background: #ffffff;
+    color: #292333;
+    border: 1px solid #e8dff1;
+    border-radius: 22px;
+    box-shadow: 0 12px 40px rgba(39, 26, 52, 0.20);
+    scrollbar-width: thin;
+    scrollbar-color: #bca5d7 transparent;
+}
+
+/* Título del ticket */
+
+aside::before {
+    content: "🛍️  TU CARRITO";
+    display: block;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    color: #6b4c8a;
+    border-bottom: 2px solid #eee7f5;
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+aside p {
+    margin: 0;
+    padding: 10px 0;
+    color: #655a70;
+    border-bottom: 1px solid #f0edf5;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+/* El total de la compra */
+
+aside #comprar {
+    width: 100%;
+    margin-top: 15px;
+    background: #2e8b69;
+    box-shadow: 0 5px 14px rgba(46, 139, 105, 0.2);
+}
+
+aside #comprar:hover {
+    background: #226c50;
+}
+
+/* ==============================
+   PIE DE PÁGINA
+   ============================== */
+
+footer {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px;
+    background: #292333;
+    color: #d8cde5;
+    border-radius: 0 0 24px 24px;
+    text-align: center;
+    font-size: 13px;
+}
+
+/* ==============================
+   ADAPTACIÓN A TABLETS
+   ============================== */
+
+@media (max-width: 900px) {
+    section {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+    }
+
+    header {
+        padding: 30px;
+    }
+
+    main {
+        padding: 25px;
+    }
+}
+
+/* ==============================
+   ADAPTACIÓN A MÓVILES
+   ============================== */
+
+@media (max-width: 560px) {
+    body {
+        padding: 12px;
+    }
+
+    header {
+        padding: 28px 22px;
+        border-radius: 20px 20px 0 0;
+    }
+
+    header h2 {
+        font-size: 15px;
+    }
+
+    main {
+        padding: 20px 14px;
+    }
+
+    section {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    article {
+        padding: 22px;
+    }
+
+    aside {
+        right: 12px;
+        bottom: 12px;
+        width: 260px;
+        max-height: 45vh;
+        padding: 18px;
+        border-radius: 18px;
+    }
+
+    footer {
+        padding: 20px 12px;
+    }
+}
+
