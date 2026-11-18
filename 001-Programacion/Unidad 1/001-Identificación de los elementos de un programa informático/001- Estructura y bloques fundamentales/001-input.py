@@ -1,1 +1,0 @@
-input("¿como te llamas?")
