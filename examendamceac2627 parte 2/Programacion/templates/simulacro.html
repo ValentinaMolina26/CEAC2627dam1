@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+    <title>Médicos</title>
+</head>
+<body>
+    <h1>Listado de médicos</h1>
+    <table border="1">
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>apellidos</th>
+            <th>email</th>
+            <th>especialidad</th>
+            <th>número de colegiado</th>
+            <th>activo</th>
+        </tr>
+        {% for medico in medicos %}
+        <tr>
+            <td>{{ medico.id }}</td>
+            <td>{{ medico.nombre }}</td>
+            <td>{{ medico.apellidos }}</td>
+            <td>{{ medico.email }}</td>
+            <td>{{ medico.especialidad }}</td>
+            <td>{{ medico.numero_de_colegiado }}</td>
+            <td>{{ medico.activo }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

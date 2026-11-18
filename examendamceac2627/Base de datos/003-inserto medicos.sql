@@ -1,0 +1,22 @@
+INSERT INTO medicos (nombre, apellidos, email, especialidad, numero_de_colegiado, activo)
+VALUES
+('Carlos', 'Martínez López', 'carlos.martinez@email.com', 'Cardiología', 10001, 1),
+('Laura', 'García Pérez', 'laura.garcia@email.com', 'Pediatría', 10002, 1),
+('Javier', 'Rodríguez Sánchez', 'javier.rodriguez@email.com', 'Dermatología', 10003, 1),
+('Ana', 'Fernández Torres', 'ana.fernandez@email.com', 'Neurología', 10004, 1),
+('Miguel', 'López Martín', 'miguel.lopez@email.com', 'Traumatología', 10005, 1),
+('Elena', 'Sánchez Ruiz', 'elena.sanchez@email.com', 'Ginecología', 10006, 1),
+('David', 'Pérez Gómez', 'david.perez@email.com', 'Oftalmología', 10007, 1),
+('María', 'Díaz Romero', 'maria.diaz@email.com', 'Medicina general', 10008, 1),
+('Pablo', 'Moreno Castro', 'pablo.moreno@email.com', 'Psiquiatría', 10009, 1),
+('Lucía', 'Álvarez Jiménez', 'lucia.alvarez@email.com', 'Endocrinología', 10010, 1),
+('Sergio', 'Ruiz Navarro', 'sergio.ruiz@email.com', 'Urología', 10011, 1),
+('Carmen', 'Alonso Vega', 'carmen.alonso@email.com', 'Oncología', 10012, 1),
+('Daniel', 'Gutiérrez Molina', 'daniel.gutierrez@email.com', 'Neumología', 10013, 1),
+('Isabel', 'Romero Herrera', 'isabel.romero@email.com', 'Reumatología', 10014, 1),
+('Alejandro', 'Torres Medina', 'alejandro.torres@email.com', 'Nefrología', 10015, 1),
+('Paula', 'Navarro León', 'paula.navarro@email.com', 'Otorrinolaringología', 10016, 1),
+('Andrés', 'Castro Gil', 'andres.castro@email.com', 'Radiología', 10017, 1),
+('Marta', 'Vázquez Ortiz', 'marta.vazquez@email.com', 'Hematología', 10018, 0),
+('Rubén', 'Iglesias Flores', 'ruben.iglesias@email.com', 'Anestesiología', 10019, 1),
+('Claudia', 'Herrera Santos', 'claudia.herrera@email.com', 'Medicina interna', 10020, 0);

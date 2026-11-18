@@ -1,0 +1,344 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDEA SPACE | Creator Studio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <aside class="sidebar">
+
+            <a href="#inicio" class="logo">
+                <span class="logo-icon">✦</span>
+                <span>IDEA SPACE</span>
+            </a>
+
+            <p class="menu-title">MENÚ PRINCIPAL</p>
+
+            <nav>
+                <a href="#inicio" class="nav-link active">
+                    <span>⌂</span> Dashboard
+                </a>
+
+                <a href="#crear" class="nav-link">
+                    <span>＋</span> Crear contenido
+                </a>
+
+                <a href="#biblioteca" class="nav-link">
+                    <span>▤</span> Mi contenido
+                </a>
+            </nav>
+
+            <div class="sidebar-card">
+                <span class="sparkle">✧</span>
+                <h3>Tu creatividad no tiene límites</h3>
+                <p>Organiza tus ideas y convierte tus proyectos en contenido.</p>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="avatar">V</div>
+                <div>
+                    <strong>Valentina Molina</strong>
+                    <small>Creator Studio</small>
+                </div>
+            </div>
+
+        </aside>
+
+
+        <main class="main-content" id="inicio">
+
+            <header class="topbar">
+
+                <div>
+                    <p class="eyebrow">TU ESPACIO CREATIVO</p>
+                    <h1>¡Hola, creadora! <span>✦</span></h1>
+                    <p class="subtitle">
+                        Organiza tu contenido y haz crecer tus ideas.
+                    </p>
+                </div>
+
+                <div class="date-label" id="todayLabel"></div>
+
+            </header>
+
+
+            <section class="welcome-banner">
+
+                <div>
+                    <span class="banner-tag">CREA · ORGANIZA · CRECE</span>
+
+                    <h2>Las grandes ideas empiezan aquí.</h2>
+
+                    <p>
+                        Planifica tus publicaciones, organiza tus proyectos
+                        y mantén tu creatividad en movimiento.
+                    </p>
+
+                    <a href="#crear" class="banner-button">
+                        Crear contenido <span>→</span>
+                    </a>
+                </div>
+
+                <div class="banner-decoration">✦</div>
+
+            </section>
+
+
+            <section class="stats-grid">
+
+                <article class="stat-card">
+                    <div class="stat-icon purple">▤</div>
+                    <p>Total de contenidos</p>
+                    <h2 id="totalCount">0</h2>
+                    <small>Contenido registrado</small>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-icon pink">✎</div>
+                    <p>Por planificar</p>
+                    <h2 id="plannedCount">0</h2>
+                    <small>Ideas y publicaciones pendientes</small>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-icon green">✓</div>
+                    <p>Publicados</p>
+                    <h2 id="publishedCount">0</h2>
+                    <small>Contenido realizado</small>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-icon orange">◷</div>
+                    <p>Próximos</p>
+                    <h2 id="upcomingCount">0</h2>
+                    <small>Publicaciones futuras</small>
+                </article>
+
+            </section>
+
+
+            <section class="workspace-grid">
+
+                <div class="panel composer-panel" id="crear">
+
+                    <div class="section-heading">
+                        <div>
+                            <p class="eyebrow">PLANIFICACIÓN</p>
+                            <h2>Crear contenido</h2>
+                        </div>
+
+                        <span class="heading-icon">✧</span>
+                    </div>
+
+                    <p class="panel-description">
+                        Añade una nueva idea o prepara tu próxima publicación.
+                    </p>
+
+                    <form id="contentForm">
+
+                        <input type="hidden" id="contentId">
+
+                        <div class="form-group">
+                            <label for="contentTitle">Nombre del contenido</label>
+
+                            <input
+                                type="text"
+                                id="contentTitle"
+                                placeholder="Ej. Ideas para Instagram..."
+                                maxlength="100"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+                                <label for="platform">Red social</label>
+
+                                <select id="platform" required>
+                                    <option value="Instagram">Instagram</option>
+                                    <option value="TikTok">TikTok</option>
+                                    <option value="Facebook">Facebook</option>
+                                    <option value="YouTube">YouTube</option>
+                                    <option value="LinkedIn">LinkedIn</option>
+                                    <option value="Otra">Otra</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="format">Formato</label>
+
+                                <select id="format" required>
+                                    <option value="Publicación">Publicación</option>
+                                    <option value="Historia">Historia</option>
+                                    <option value="Reel">Reel</option>
+                                    <option value="Vídeo">Vídeo</option>
+                                    <option value="Carrusel">Carrusel</option>
+                                    <option value="Artículo">Artículo</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+                                <label for="publishDate">Fecha de publicación</label>
+
+                                <input type="date" id="publishDate">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contentStatus">Estado</label>
+
+                                <select id="contentStatus">
+                                    <option value="idea">Idea</option>
+                                    <option value="planned">Planificado</option>
+                                    <option value="published">Publicado</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contentDescription">Descripción o notas</label>
+
+                            <textarea
+                                id="contentDescription"
+                                rows="3"
+                                placeholder="Escribe aquí el contenido, hashtags, ideas o detalles..."
+                                maxlength="1000"
+                            ></textarea>
+                        </div>
+
+                        <div class="form-buttons">
+
+                            <button type="submit" class="primary-button" id="submitBtn">
+                                + Guardar contenido
+                            </button>
+
+                            <button
+                                type="button"
+                                class="cancel-button"
+                                id="cancelEdit"
+                                hidden
+                            >
+                                Cancelar
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+                <div class="panel tips-panel">
+
+                    <div class="section-heading">
+                        <div>
+                            <p class="eyebrow">INSPIRACIÓN</p>
+                            <h2>Consejo creativo</h2>
+                        </div>
+
+                        <span class="heading-icon">☀</span>
+                    </div>
+
+                    <div class="tip-decoration">✧</div>
+
+                    <h3>La constancia crea resultados.</h3>
+
+                    <p>
+                        No necesitas publicar todos los días.
+                        Lo importante es tener una estrategia,
+                        conocer a tu audiencia y compartir contenido
+                        que aporte valor.
+                    </p>
+
+                    <div class="tip-footer">
+                        <span>✦</span> Un paso a la vez.
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <section class="panel library-panel" id="biblioteca">
+
+                <div class="library-heading">
+
+                    <div>
+                        <p class="eyebrow">TU BIBLIOTECA CREATIVA</p>
+                        <h2>Mi contenido</h2>
+                        <p class="panel-description">
+                            Gestiona todas tus ideas y publicaciones.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="filters">
+
+                    <input
+                        type="search"
+                        id="searchInput"
+                        placeholder="⌕ Buscar contenido..."
+                    >
+
+                    <select id="filterStatus">
+                        <option value="all">Todos los estados</option>
+                        <option value="idea">Ideas</option>
+                        <option value="planned">Planificados</option>
+                        <option value="published">Publicados</option>
+                    </select>
+
+                    <select id="filterPlatform">
+                        <option value="all">Todas las redes</option>
+                        <option value="Instagram">Instagram</option>
+                        <option value="TikTok">TikTok</option>
+                        <option value="Facebook">Facebook</option>
+                        <option value="YouTube">YouTube</option>
+                        <option value="LinkedIn">LinkedIn</option>
+                        <option value="Otra">Otra</option>
+                    </select>
+
+                </div>
+
+                <div id="contentList" class="content-list"></div>
+
+                <div id="emptyState" class="empty-state" hidden>
+                    <div class="empty-icon">✧</div>
+                    <h3>Tu espacio creativo te espera</h3>
+                    <p>
+                        Todavía no hay contenido aquí.
+                        ¡Empieza añadiendo tu primera idea!
+                    </p>
+                    <a href="#crear">Crear mi primer contenido →</a>
+                </div>
+
+            </section>
+
+
+            <footer>
+                <p>IDEA SPACE · Creado por Valentina Molina</p>
+                <span>Organiza tus ideas. Inspira al mundo. ✦</span>
+            </footer>
+
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+
