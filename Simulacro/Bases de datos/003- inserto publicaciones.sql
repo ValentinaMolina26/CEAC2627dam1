@@ -1,0 +1,35 @@
+
+INSERT INTO publicaciones 
+(nombre, plataforma, tipo_contenido, descripcion, fecha_publicacion, estado, presupuesto, enlace)
+VALUES
+('Lanzamiento nueva colección', 'Instagram', 'Reel', 'Presentación de la nueva colección de primavera', '2026-11-24', 'Pendiente', 50.00, 'https://instagram.com/p/001'),
+('Descuento Black Friday', 'Facebook', 'Imagen', 'Anuncio de descuentos especiales del Black Friday', '2026-11-25', 'Pendiente', 75.00, 'https://facebook.com/p/002'),
+('Rutina de maquillaje', 'TikTok', 'Video', 'Tutorial de maquillaje natural para todos los días', '2026-11-26', 'Publicado', 20.00, 'https://tiktok.com/v/003'),
+('Consejos de marketing', 'LinkedIn', 'Carrusel', 'Cinco consejos para mejorar una estrategia digital', '2026-11-27', 'Pendiente', 30.00, 'https://linkedin.com/p/004'),
+('Inspiración del día', 'Instagram', 'Historia', 'Frase motivacional para comenzar el día', '2026-11-28', 'Publicado', 0.00, 'https://instagram.com/s/005'),
+('Promoción de Navidad', 'Facebook', 'Imagen', 'Promoción especial de productos navideños', '2026-11-29', 'Pendiente', 100.00, 'https://facebook.com/p/006'),
+('Un día en la empresa', 'TikTok', 'Video', 'Video mostrando un día de trabajo en la empresa', '2026-11-30', 'Pendiente', 15.00, 'https://tiktok.com/v/007'),
+('Presentación del equipo', 'LinkedIn', 'Imagen', 'Presentación de los integrantes del equipo', '2026-12-01', 'Publicado', 10.00, 'https://linkedin.com/p/008'),
+('Nuevo producto disponible', 'Instagram', 'Reel', 'Presentación de un nuevo producto de temporada', '2026-12-02', 'Pendiente', 45.00, 'https://instagram.com/p/009'),
+('Sorteo de Navidad', 'Facebook', 'Video', 'Anuncio de un sorteo para los seguidores', '2026-12-03', 'Pendiente', 60.00, 'https://facebook.com/p/010'),
+('Errores en redes sociales', 'TikTok', 'Video', 'Errores comunes al gestionar redes sociales', '2026-12-04', 'Publicado', 25.00, 'https://tiktok.com/v/011'),
+('Inspiración creativa', 'Pinterest', 'Imagen', 'Ideas creativas para diseñar contenido visual', '2026-12-05', 'Pendiente', 0.00, 'https://pinterest.com/p/012'),
+('Campaña de invierno', 'Instagram', 'Carrusel', 'Campaña publicitaria de productos de invierno', '2026-12-06', 'Pendiente', 120.00, 'https://instagram.com/p/013'),
+('Ventajas del comercio digital', 'LinkedIn', 'Artículo', 'Beneficios de tener un negocio en internet', '2026-12-07', 'Publicado', 20.00, 'https://linkedin.com/p/014'),
+('Receta de temporada', 'TikTok', 'Video', 'Preparación de una receta fácil de invierno', '2026-12-08', 'Pendiente', 15.00, 'https://tiktok.com/v/015'),
+('Detrás de cámaras', 'Instagram', 'Historia', 'Preparación de una sesión fotográfica', '2026-12-09', 'Publicado', 5.00, 'https://instagram.com/s/016'),
+('Testimonio de cliente', 'Facebook', 'Video', 'Opinión de un cliente sobre el servicio', '2026-12-10', 'Pendiente', 35.00, 'https://facebook.com/p/017'),
+('Tendencias digitales 2027', 'LinkedIn', 'Carrusel', 'Tendencias de marketing para el próximo año', '2026-12-11', 'Pendiente', 40.00, 'https://linkedin.com/p/018'),
+('Ideas para emprender', 'TikTok', 'Video', 'Ideas para comenzar un pequeño negocio', '2026-12-12', 'Publicado', 30.00, 'https://tiktok.com/v/019'),
+('Decoración navideña', 'Pinterest', 'Imagen', 'Inspiración para decorar espacios en Navidad', '2026-12-13', 'Pendiente', 10.00, 'https://pinterest.com/p/020'),
+('Promoción de fin de año', 'Instagram', 'Reel', 'Descuentos especiales para finalizar el año', '2026-12-14', 'Pendiente', 80.00, 'https://instagram.com/p/021'),
+('Objetivos para 2027', 'Facebook', 'Imagen', 'Publicación sobre objetivos para el nuevo año', '2026-12-15', 'Publicado', 0.00, 'https://facebook.com/p/022'),
+('Cómo crear contenido', 'TikTok', 'Video', 'Consejos para crear contenido atractivo', '2026-12-16', 'Pendiente', 25.00, 'https://tiktok.com/v/023'),
+('Marca personal', 'LinkedIn', 'Artículo', 'Importancia de desarrollar una marca personal', '2026-12-17', 'Pendiente', 15.00, 'https://linkedin.com/p/024'),
+('Ideas de outfits', 'Instagram', 'Carrusel', 'Combinaciones de ropa para la temporada', '2026-12-18', 'Publicado', 30.00, 'https://instagram.com/p/025'),
+('Campaña solidaria', 'Facebook', 'Imagen', 'Anuncio de una campaña solidaria de invierno', '2026-12-19', 'Pendiente', 90.00, 'https://facebook.com/p/026'),
+('Edición de videos', 'TikTok', 'Video', 'Trucos básicos para editar videos cortos', '2026-12-20', 'Publicado', 20.00, 'https://tiktok.com/v/027'),
+('Frases inspiradoras', 'Pinterest', 'Imagen', 'Colección de frases para compartir', '2026-12-21', 'Pendiente', 0.00, 'https://pinterest.com/p/028'),
+('Resumen del año', 'Instagram', 'Reel', 'Recopilación de los mejores momentos del año', '2026-12-30', 'Pendiente', 55.00, 'https://instagram.com/p/029'),
+('Feliz año nuevo', 'Facebook', 'Video', 'Mensaje de felicitación para la comunidad', '2026-12-31', 'Pendiente', 40.00, 'https://facebook.com/p/030');
+

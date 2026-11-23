@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialHub - Inicio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>SocialHub</h1>
+
+        <nav>
+            <a href="/">Inicio</a>
+            <a href="/formulario">Añadir publicación</a>
+            <a href="/peticion">Consultar con IA</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="presentacion">
+            <h2>¡Bienvenida a SocialHub!</h2>
+            <p>Organiza, crea y gestiona tus publicaciones en un solo lugar.</p>
+        </section>
+
+        <section class="contenido">
+
+            <h2>Mis publicaciones</h2>
+
+            {% for publicacion in publicaciones %}
+
+            <article class="tarjeta">
+
+                <h3>{{ publicacion[1] }}</h3>
+
+                <p><strong>Plataforma:</strong> {{ publicacion[2] }}</p>
+
+                <p><strong>Tipo de contenido:</strong> {{ publicacion[3] }}</p>
+
+                <p><strong>Descripción:</strong> {{ publicacion[4] }}</p>
+
+                <p><strong>Fecha:</strong> {{ publicacion[5] }}</p>
+
+                <p><strong>Estado:</strong> {{ publicacion[6] }}</p>
+
+                <p><strong>Presupuesto:</strong> {{ publicacion[7] }} €</p>
+
+                <p><strong>Enlace:</strong> {{ publicacion[8] }}</p>
+
+            </article>
+
+            {% else %}
+
+            <p>Todavía no hay publicaciones registradas.</p>
+
+            {% endfor %}
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>SocialHub - Organiza tus redes sociales</p>
+    </footer>
+
+</body>
+</html>
+

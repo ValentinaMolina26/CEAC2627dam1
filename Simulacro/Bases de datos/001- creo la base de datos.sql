@@ -1,0 +1,2 @@
+CREATE DATABASE socialhub20261123;
+USE socialhub20261123;

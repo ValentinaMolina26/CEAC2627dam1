@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SocialHub</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>SocialHub</h1>
+
+        <nav>
+            <a href="/">Inicio</a>
+            <a href="/formulario">Añadir publicación</a>
+            <a href="/peticion">Consultar con IA</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block contenido %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>SocialHub - Organiza tus redes sociales</p>
+    </footer>
+
+</body>
+</html>
+

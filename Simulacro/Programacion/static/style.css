@@ -1,0 +1,196 @@
+
+/* ESTILOS GENERALES */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f1f8;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* CABECERA */
+
+header {
+    background-color: #6b4c8a;
+    color: white;
+    padding: 25px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+/* MENU DE NAVEGACION */
+
+nav {
+    margin-top: 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #e2d3f5;
+    text-decoration: underline;
+}
+
+/* CONTENIDO PRINCIPAL */
+
+main {
+    width: 85%;
+    max-width: 1000px;
+    margin: 30px auto;
+}
+
+/* PRESENTACION */
+
+.presentacion {
+    background-color: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.presentacion h2 {
+    color: #6b4c8a;
+    margin-bottom: 10px;
+}
+
+/* LISTADO DE PUBLICACIONES */
+
+.contenido h2 {
+    color: #6b4c8a;
+    margin-bottom: 20px;
+}
+
+.tarjeta {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border-left: 5px solid #6b4c8a;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+.tarjeta h3 {
+    color: #6b4c8a;
+    margin-bottom: 10px;
+}
+
+.tarjeta p {
+    margin-bottom: 8px;
+}
+
+/* FORMULARIOS */
+
+.formulario-contenedor {
+    background-color: white;
+    max-width: 650px;
+    margin: 30px auto;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+.formulario-contenedor h2 {
+    color: #6b4c8a;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+form label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form input,
+form textarea,
+form select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    font-size: 15px;
+}
+
+form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* BOTONES */
+
+button {
+    background-color: #6b4c8a;
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    margin-top: 20px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #52366e;
+}
+
+/* RESULTADOS DE LA CONSULTA IA */
+
+.resultados {
+    margin-top: 30px;
+}
+
+.resultados h2 {
+    color: #6b4c8a;
+    margin-bottom: 15px;
+}
+
+/* PIE DE PAGINA */
+
+footer {
+    background-color: #6b4c8a;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+/* ADAPTACION A MOVILES */
+
+@media (max-width: 600px) {
+
+    main {
+        width: 92%;
+    }
+
+    header h1 {
+        font-size: 25px;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 5px;
+    }
+
+    .formulario-contenedor {
+        padding: 20px;
+    }
+}
+

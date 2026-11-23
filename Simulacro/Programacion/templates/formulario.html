@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialHub - Nueva publicación</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>SocialHub</h1>
+
+        <nav>
+            <a href="/">Inicio</a>
+            <a href="/formulario">Añadir publicación</a>
+            <a href="/peticion">Consultar con IA</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="formulario-contenedor">
+
+            <h2>Añadir nueva publicación</h2>
+
+            <p>Completa los datos de tu nueva publicación.</p>
+
+            <form action="/formulario" method="POST">
+
+                <label>Nombre:</label>
+                <input type="text" name="nombre" required>
+
+                <label>Plataforma:</label>
+                <input type="text" name="plataforma" required>
+
+                <label>Tipo de contenido:</label>
+                <input type="text" name="tipo_contenido" required>
+
+                <label>Descripción:</label>
+                <textarea name="descripcion" required></textarea>
+
+                <label>Fecha de publicación:</label>
+                <input type="date" name="fecha_publicacion" required>
+
+                <label>Estado:</label>
+                <input type="text" name="estado" required>
+
+                <label>Presupuesto:</label>
+                <input type="number" step="0.01" name="presupuesto" required>
+
+                <label>Enlace:</label>
+                <input type="text" name="enlace">
+
+                <button type="submit">Guardar publicación</button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>SocialHub - Organiza tus redes sociales</p>
+    </footer>
+
+</body>
+</html>
+

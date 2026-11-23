@@ -1,0 +1,73 @@
+{
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialHub - Inteligencia Artificial</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>SocialHub</h1>
+
+        <nav>
+            <a href="/">Inicio</a>
+            <a href="/formulario">Añadir publicación</a>
+            <a href="/peticion">Consultar con IA</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="formulario-contenedor">
+
+            <h2>Consulta inteligente</h2>
+
+            <p>Pregunta a nuestra IA sobre tus publicaciones.</p>
+
+            <form action="/peticion" method="POST">
+
+                <label>Escribe tu pregunta:</label>
+
+                <textarea
+                    name="pregunta"
+                    placeholder="Ejemplo: ¿Cuántas publicaciones tenemos?"
+                    required></textarea>
+
+                <button type="submit">Consultar con IA</button>
+
+            </form>
+
+        </section>
+
+        {% if resultados %}
+
+        <section class="resultados">
+
+            <h2>Resultados de la consulta</h2>
+
+            {% for resultado in resultados %}
+
+            <article class="tarjeta">
+                <p>{{ resultado }}</p>
+            </article>
+
+            {% endfor %}
+
+        </section>
+
+        {% endif %}
+
+    </main>
+
+    <footer>
+        <p>SocialHub - Organiza tus redes sociales</p>
+    </footer>
+
+</body>
+</html>
+
