@@ -1,0 +1,3 @@
+INSERT INTO peliculas (titulo, titulo_original, director, genero, sinopsis, anio_estreno, fecha_estreno, duracion_minutos, pais, idioma_original, clasificacion_edades, presupuesto, recaudacion, valoracion_media, numero_valoraciones, numero_visualizaciones, disponible, vista, favorita, imagen_portada, url_trailer, precio_alquiler, precio_compra, formato, subtitulos_disponibles)
+VALUES
+('Interstellar', 'Interstellar', 'Christopher Nolan', 'Ciencia ficcion', 'Un grupo de exploradores', '2014', '2014-11-07', '169', 'Estados Unidos', 'Ingles','12','165000000', '7000000000', '8.7', '1500', '25000', '1', '0', '1', 'interstellar.jpg', 'https://', '3.99', '12.99', '4K', '2');

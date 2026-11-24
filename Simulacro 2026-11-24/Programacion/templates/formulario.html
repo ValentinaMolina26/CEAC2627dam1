@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Añadir película</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>Añadir una película</h1>
+
+        <nav>
+            <a href="/">Volver al inicio</a>
+            <a href="/consulta_ia">Consultar con IA</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section>
+            <h2>Datos de la película</h2>
+
+            <form action="/nueva_pelicula" method="POST">
+
+                <label>Título:</label>
+                <input type="text" name="titulo" required>
+
+                <label>Título original:</label>
+                <input type="text" name="titulo_original">
+
+                <label>Director:</label>
+                <input type="text" name="director">
+
+                <label>Género:</label>
+                <input type="text" name="genero">
+
+                <label>Sinopsis:</label>
+                <textarea name="sinopsis"></textarea>
+
+                <label>Año de estreno:</label>
+                <input type="number" name="anio_estreno">
+
+                <label>Fecha de estreno:</label>
+                <input type="date" name="fecha_estreno">
+
+                <label>Duración:</label>
+                <input type="number" name="duracion_minutos">
+
+                <label>País:</label>
+                <input type="text" name="pais">
+
+                <label>Idioma original:</label>
+                <input type="text" name="idioma_original">
+
+                <label>Clasificación por edades:</label>
+                <input type="number" name="clasificacion_edades">
+
+                <label>Presupuesto:</label>
+                <input type="number" name="presupuesto">
+
+                <label>Recaudación:</label>
+                <input type="number" name="recaudacion">
+
+                <label>Valoración media:</label>
+                <input type="number" step="0.1" name="valoracion_media">
+
+                <label>Número de valoraciones:</label>
+                <input type="number" name="numero_valoraciones">
+
+                <label>Número de visualizaciones:</label>
+                <input type="number" name="numero_visualizaciones">
+
+                <label>Disponible:</label>
+                <input type="number" name="disponible">
+
+                <label>Vista:</label>
+                <input type="number" name="vista">
+
+                <label>Favorita:</label>
+                <input type="number" name="favorita">
+
+                <label>Imagen de portada:</label>
+                <input type="text" name="imagen_portada">
+
+                <label>URL del tráiler:</label>
+                <input type="text" name="url_trailer">
+
+                <label>Precio de alquiler:</label>
+                <input type="number" step="0.01" name="precio_alquiler">
+
+                <label>Precio de compra:</label>
+                <input type="number" step="0.01" name="precio_compra">
+
+                <label>Formato:</label>
+                <input type="text" name="formato">
+
+                <label>Subtítulos disponibles:</label>
+                <input type="number" name="subtitulos_disponibles">
+
+                <button type="submit">Guardar película</button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Mi Videoteca - Proyecto DAM</p>
+    </footer>
+
+</body>
+</html>
+

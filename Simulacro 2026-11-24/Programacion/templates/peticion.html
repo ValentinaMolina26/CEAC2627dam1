@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar con IA</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>Consultar mi videoteca con IA</h1>
+
+        <nav>
+            <a href="/">Inicio</a>
+            <a href="/nueva_pelicula">Añadir película</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section>
+            <h2>Escribe tu petición</h2>
+
+            <form action="/consulta_ia" method="POST">
+
+                <label>¿Qué películas quieres buscar?</label>
+                <input type="text" name="peticion" required>
+
+                <button type="submit">Consultar</button>
+
+            </form>
+        </section>
+
+        <section>
+            <h2>Resultados</h2>
+
+            {% if peliculas %}
+
+                {% for pelicula in peliculas %}
+
+                    <article>
+                        <h3>{{ pelicula.titulo }}</h3>
+                        <p>Director: {{ pelicula.director }}</p>
+                    </article>
+
+                {% endfor %}
+
+            {% endif %}
+
+            {% if mensaje %}
+                <p>{{ mensaje }}</p>
+            {% endif %}
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Mi Videoteca - Proyecto DAM</p>
+    </footer>
+
+</body>
+</html>
+

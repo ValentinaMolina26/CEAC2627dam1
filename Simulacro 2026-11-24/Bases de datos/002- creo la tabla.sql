@@ -1,0 +1,30 @@
+CREATE TABLE peliculas(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+  titulo VARCHAR(100),
+  titulo_original VARCHAR(100),
+  director VARCHAR(100),
+  genero VARCHAR(100),
+  sinopsis TEXT,
+  anio_estreno INT,
+  fecha_estreno DATE,
+  duracion_minutos INT,
+  pais VARCHAR(100),
+  idioma_original VARCHAR(100),
+  clasificacion_edades INT,
+  presupuesto DECIMAL,
+  recaudacion DECIMAL,
+  valoracion_media DECIMAL,
+  numero_valoraciones INT,
+  numero_visualizaciones INT,
+  disponible INT,
+  vista INT,
+  favorita INT,
+  imagen_portada VARCHAR(100),
+  url_trailer VARCHAR(100),
+  precio_alquiler DECIMAL,
+  precio_compra DECIMAL,
+  formato VARCHAR(100),
+  subtitulos_disponibles INT
+ 
+);
+

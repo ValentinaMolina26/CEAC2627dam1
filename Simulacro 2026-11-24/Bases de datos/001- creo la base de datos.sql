@@ -1,0 +1,3 @@
+CREATE DATABASE videoteca20261124;
+USE videoteca20261124;
+

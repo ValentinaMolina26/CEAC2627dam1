@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Videoteca</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>Mi Videoteca</h1>
+        <p>Consulta y organiza tus películas</p>
+
+        <nav>
+            <a href="/">Inicio</a>
+            <a href="/nueva_pelicula">Añadir película</a>
+            <a href="/consulta_ia">Consultar con IA</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section>
+            <h2>Películas guardadas</h2>
+
+            {% for pelicula in peliculas %}
+
+                <article>
+                    <h3>{{ pelicula.titulo }}</h3>
+
+                    <p><strong>Director:</strong> {{ pelicula.director }}</p>
+                    <p><strong>Género:</strong> {{ pelicula.genero }}</p>
+                    <p><strong>Año:</strong> {{ pelicula.anio_estreno }}</p>
+                    <p><strong>Duración:</strong> {{ pelicula.duracion_minutos }} minutos</p>
+                    <p><strong>Sinopsis:</strong> {{ pelicula.sinopsis }}</p>
+                </article>
+
+            {% endfor %}
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Mi Videoteca - Proyecto DAM</p>
+    </footer>
+
+</body>
+</html>
+

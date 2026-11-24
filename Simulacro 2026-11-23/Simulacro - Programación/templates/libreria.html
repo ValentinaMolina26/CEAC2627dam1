@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+<head>
+    <title>Biblioteca</title>
+</head>
+<body>
+    <h1>Listado de libros</h1>
+        {% for libro de libros %}
+        		<h3>{{ libro.titulo }}</h3>
+            <p>Autor: {{ libro.autor }}</p>
+            <p>Editorial: {{ libro.editorial }}</p>
+            <p>Genero: {{ libro.genero }}</p>
+            <p>Precio: {{ libro.precio }}</p>
+</body>
+</html>
