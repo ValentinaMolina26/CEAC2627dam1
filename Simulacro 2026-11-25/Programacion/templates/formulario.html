@@ -1,0 +1,51 @@
+ <!doctype html>
+<html>
+<head>
+    <title>Nuevo Videojuego</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Añadir videojuego</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Formulario de registro</h2>
+            <form method="POST">
+
+                <input type="text" name="titulo" placeholder="Título"><br>
+                <input type="text" name="desarrollador" placeholder="Desarrollador"><br>
+                <input type="text" name="distribuidor" placeholder="Distribuidor"><br>
+                <input type="text" name="genero" placeholder="Género"><br>
+                <input type="text" name="descripcion" placeholder="Descripción"><br>
+                <input type="text" name="anio_lanzamiento" placeholder="Año de lanzamiento"><br>
+                <input type="text" name="fecha_lanzamiento" placeholder="Fecha de lanzamiento"><br>
+                <input type="text" name="plataforma" placeholder="Plataforma"><br>
+                <input type="text" name="pais" placeholder="País"><br>
+                <input type="text" name="idioma" placeholder="Idioma"><br>
+                <input type="text" name="clasificacion_edades" placeholder="Clasificación de edades"><br>
+                <input type="number" step="any" name="presupuesto" placeholder="Presupuesto"><br>
+                <input type="number" step="any" name="ingresos" placeholder="Ingresos"><br>
+                <input type="number" step="any" name="valoracion_media" placeholder="Valoración media"><br>
+                <input type="number" name="numero_valoraciones" placeholder="Número de valoraciones"><br>
+                <input type="number" name="unidades_vendidas" placeholder="Unidades vendidas"><br>
+                <input type="number" name="disponible" placeholder="Disponible (1 o 0)"><br>
+                <input type="number" name="multijugador" placeholder="Multijugador (1 o 0)"><br>
+                <input type="number" name="favorito" placeholder="Favorito (1 o 0)"><br>
+                <input type="text" name="imagen_portada" placeholder="Imagen de portada"><br>
+                <input type="text" name="url_trailer" placeholder="URL del trailer"><br>
+                <input type="number" step="any" name="precio_original" placeholder="Precio original"><br>
+                <input type="number" step="any" name="precio_rebajado" placeholder="Precio rebajado"><br>
+                <input type="number" step="any" name="espacio_requerido" placeholder="Espacio requerido"><br>
+                <input type="number" name="compras_integradas" placeholder="Compras integradas (1 o 0)"><br>
+
+                <button type="submit">Guardar</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>Registro de videojuegos</p>
+    </footer>
+</body>
+</html>
+

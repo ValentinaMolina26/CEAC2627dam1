@@ -1,0 +1,3 @@
+INSERT INTO videojuegos (titulo, desarrollador, distribuidor, genero, descripcion, anio_lanzamiento, fecha_lanzamiento, plataforma, pais, idioma, clasificacion_edades, presupuesto, ingresos, valoracion_media, numero_valoraciones, unidades_vendidas, disponible, multijugador, favorito, imagen_portada, url_trailer, precio_original, precio_rebajado, espacio_requerido, compras_integradas)
+VALUES
+('Minecraft', 'Mojang Studios', 'Xbox Game Studios', 'Aventura', 'Mundo abierto de construccion', '2011', '2011-11-18', 'PC', 'Suecia', 'Español','7','1000000.00', '50000000.00', '9.2', '15000', '300000000', '1', '1', '0', 'minecraft.jpg', 'https://', '29.99', '19.99', '4.5', '2');

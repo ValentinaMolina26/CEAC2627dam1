@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+    <title>Videoteca de videojuegos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Lista de videojuegos</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Videojuegos registrados</h2>
+
+            {% for videojuego in videojuegos %}
+
+                <article>
+                    <h3>{{ videojuego.titulo }}</h3>
+
+                    <p><strong>id:</strong> {{ videojuego.id }}</p>
+                    <p><strong>desarrollador:</strong> {{ videojuego.desarrollador }}</p>
+                    <p><strong>distribuidor:</strong> {{ videojuego.distribuidor }}</p>
+                    <p><strong>genero:</strong> {{ videojuego.genero }}</p>
+                    <p><strong>descripcion:</strong> {{ videojuego.descripcion }}</p>
+                    <p><strong>anio_lanzamiento:</strong> {{ videojuego.anio_lanzamiento }}</p>
+                    <p><strong>fecha_lanzamiento:</strong> {{ videojuego.fecha_lanzamiento }}</p>
+                    <p><strong>plataforma:</strong> {{ videojuego.plataforma }}</p>
+                    <p><strong>pais:</strong> {{ videojuego.pais }}</p>
+                    <p><strong>idioma:</strong> {{ videojuego.idioma }}</p>
+                    <p><strong>clasificacion_edades:</strong> {{ videojuego.clasificacion_edades }}</p>
+                    <p><strong>presupuesto:</strong> {{ videojuego.presupuesto }}</p>
+                    <p><strong>ingresos:</strong> {{ videojuego.ingresos }}</p>
+                    <p><strong>valoracion_media:</strong> {{ videojuego.valoracion_media }}</p>
+                    <p><strong>numero_valoraciones:</strong> {{ videojuego.numero_valoraciones }}</p>
+                    <p><strong>unidades_vendidas:</strong> {{ videojuego.unidades_vendidas }}</p>
+                    <p><strong>disponible:</strong> {{ videojuego.disponible }}</p>
+                    <p><strong>multijugador:</strong> {{ videojuego.multijugador }}</p>
+                    <p><strong>favorito:</strong> {{ videojuego.favorito }}</p>
+                    <p><strong>imagen_portada:</strong> {{ videojuego.imagen_portada }}</p>
+                    <p><strong>url_trailer:</strong> {{ videojuego.url_trailer }}</p>
+                    <p><strong>precio_original:</strong> {{ videojuego.precio_original }}</p>
+                    <p><strong>precio_rebajado:</strong> {{ videojuego.precio_rebajado }}</p>
+                    <p><strong>espacio_requerido:</strong> {{ videojuego.espacio_requerido }}</p>
+                    <p><strong>compras_integradas:</strong> {{ videojuego.compras_integradas }}</p>
+                </article>
+                <hr>
+            {% endfor %}
+        </section>
+    </main>
+    <footer>
+        <p>Lista de videojuegos</p>
+    </footer>
+</body>
+</html>
+

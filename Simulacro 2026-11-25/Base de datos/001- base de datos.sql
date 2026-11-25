@@ -1,0 +1,3 @@
+CREATE DATABASE videojuegos20261125;
+USE videojuegos20261125;
+
