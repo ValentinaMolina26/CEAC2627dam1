@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+    <title>Vehículos</title>
+</head>
+<body>
+    <h1>Lista de vehículos</h1>
+    {% for vehiculo in vehiculos %}
+        <h2>{{ vehiculo.marca }} {{ vehiculo.modelo }}</h2>
+        <p>{{ vehiculo.version }}</p>
+        <p>{{ vehiculo.categoria }}</p>
+        <p>{{ vehiculo.descripcion }}</p>
+        <p>{{ vehiculo.anio_fabricacion }}</p>
+        <p>{{ vehiculo.fecha_matriculacion }}</p>
+        <p>{{ vehiculo.matricula }}</p>
+        <p>{{ vehiculo.pais }}</p>
+        <p>{{ vehiculo.color }}</p>
+        <p>{{ vehiculo.combustible }}</p>
+        <p>{{ vehiculo.potencia }}</p>
+        <p>{{ vehiculo.cilindrada }}</p>
+        <p>{{ vehiculo.kilometraje }}</p>
+        <p>{{ vehiculo.numero_puertas }}</p>
+        <p>{{ vehiculo.numero_plazas }}</p>
+        <p>{{ vehiculo.consumo_medio }}</p>
+        <p>{{ vehiculo.automatico }}</p>
+        <p>{{ vehiculo.disponible }}</p>
+        <p>{{ vehiculo.segunda_mano }}</p>
+        <p>{{ vehiculo.imagen }}</p>
+        <p>{{ vehiculo.url_fabricante }}</p>
+        <p>{{ vehiculo.precio_original }}</p>
+        <p>{{ vehiculo.precio_venta }}</p>
+        <p>{{ vehiculo.garantia_vigente }}</p>
+    {% endfor %}
+</body>
+</html>
+

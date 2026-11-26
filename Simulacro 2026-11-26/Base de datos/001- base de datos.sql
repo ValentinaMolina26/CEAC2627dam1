@@ -1,0 +1,3 @@
+CREATE DATABASE vehículos20261125;
+USE vehículos20261125;
+

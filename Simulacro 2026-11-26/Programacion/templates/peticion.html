@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+    <title>Consulta de vehículos</title>
+</head>
+<body>
+    <h1>Consultar vehículos con IA</h1>
+    <form action="/consulta" method="POST">
+
+        <label>¿Qué vehículos quieres buscar?</label>
+        <input type="text" name="peticion">
+
+        <input type="submit" value="Consultar">
+
+    </form>
+    {% if mensaje %}
+        <p>{{ mensaje }}</p>
+    {% endif %}
+
+    {% if vehiculos %}
+
+        <h2>Resultados de la consulta</h2>
+
+        {% for vehiculo in vehiculos %}
+
+            <h3>{{ vehiculo.marca }} {{ vehiculo.modelo }}</h3>
+            <p>{{ vehiculo.version }}</p>
+            <p>{{ vehiculo.categoria }}</p>
+            <p>{{ vehiculo.descripcion }}</p>
+            <p>{{ vehiculo.anio_fabricacion }}</p>
+            <p>{{ vehiculo.fecha_matriculacion }}</p>
+            <p>{{ vehiculo.matricula }}</p>
+            <p>{{ vehiculo.pais }}</p>
+            <p>{{ vehiculo.color }}</p>
+            <p>{{ vehiculo.combustible }}</p>
+            <p>{{ vehiculo.potencia }}</p>
+            <p>{{ vehiculo.cilindrada }}</p>
+            <p>{{ vehiculo.kilometraje }}</p>
+            <p>{{ vehiculo.numero_puertas }}</p>
+            <p>{{ vehiculo.numero_plazas }}</p>
+            <p>{{ vehiculo.consumo_medio }}</p>
+            <p>{{ vehiculo.automatico }}</p>
+            <p>{{ vehiculo.disponible }}</p>
+            <p>{{ vehiculo.segunda_mano }}</p>
+            <p>{{ vehiculo.imagen }}</p>
+            <p>{{ vehiculo.url_fabricante }}</p>
+            <p>{{ vehiculo.precio_original }}</p>
+            <p>{{ vehiculo.precio_venta }}</p>
+            <p>{{ vehiculo.garantia_vigente }}</p>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>

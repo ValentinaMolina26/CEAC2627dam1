@@ -1,0 +1,3 @@
+INSERT INTO vehiculos (marca, modelo, version, categoria, descripcion, anio_fabricacion, fecha_matriculacion, matricula, pais, color, combustible, potencia, cilindrada, kilometraje, numero_puertas, numero_plazas, consumo_medio, automatico, disponible, segunda_mano, imagen, url_fabricante, precio_original, precio_venta, garantia_vigente)
+VALUES
+('Toyota', 'Corolla', 'Hybrid 140', 'Berlina', 'Vehiculo hibrido de cinco plazas', '2024', '2024-05-15', '1234 MBC', 'Japon', 'Blanco','Hibrido','140', '1798', '25000', '5', '5', '4.5', '1', '1', '1', 'corolla.jpg', 'https://', '28500.00', '23900.00', '0');
